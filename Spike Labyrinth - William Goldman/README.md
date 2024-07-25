@@ -1,3 +1,6 @@
+> [!IMPORTANT]
+> This is an outdated copy of my repository. For the most recent version, visit the [main page](https://github.com/iliketocode2/Lego-Spike-AI-Labyrinth/tree/main).
+
 <h1> Build and Program the AI Spike Labyrinth</h1>
 <h3>This project explores how different devices can connect to the Lego Spike Prime (uart). It is also an exploration of various AI algorithms, from Q-learning to OpenMV's blob detection.</h3>
 
