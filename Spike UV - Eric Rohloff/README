@@ -1,0 +1,13 @@
+## Big Data: UV Index with the Lego Spike Prime and PicoW
+
+This activity is designed to be used with the LEGO Spike Prime and the PicoW
+with grove UV Sensor. The primary purpose of this activity is to get students
+involved with Big Data and how it can be used to make decisions. By using data
+from a UV sensor, historical data, and an API, students will be able to use data
+science techniques to make decisions based on the data.
+
+## TO-DO List
+
+-   [ ] Connect to LEGO Spike Prime
+-   [ ] Fix API calls to use historical data and refine the activity
+-   [ ] Test Activity

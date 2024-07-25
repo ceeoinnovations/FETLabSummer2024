@@ -1,0 +1,13 @@
+name = "Big Data"
+description = "Activity to get Big Data involved with the LEGO Spike Prime"
+
+
+[files]
+"https://chrisrogers.pyscriptapps.com/cbr-libraries/latest/core/andrea_terminal.py" = "andrea_terminal.py"
+"https://chrisrogers.pyscriptapps.com/cbr-libraries/latest/core/restapi.py" = "restapi.py"
+"https://chrisrogers.pyscriptapps.com/cbr-libraries/latest/core/file_os.py" = "file_os.py"
+"https://chrisrogers.pyscriptapps.com/cbr-libraries/latest/core/file_transfer.py" = "file_transfer.py"
+
+[js_modules.main]
+"https://esm.run/micro-repl@0.5.1/serial" = "micro_repl"
+"https://chrisrogers.pyscriptapps.com/cbr-libraries/latest/core/mqtt_library.js" = "mqtt_library"

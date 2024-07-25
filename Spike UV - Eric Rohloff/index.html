@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Big Data: UV Index</title>
+
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+
+        <!-- PyScript CSS -->
+        <link
+            rel="stylesheet"
+            href="https://pyscript.net/releases/2024.7.1/core.css"
+        />
+
+        <!-- This script tag bootstraps PyScript -->
+        <script
+            type="module"
+            src="https://pyscript.net/releases/2024.7.1/core.js"
+        ></script>
+        <link rel="stylesheet" href="styles.css" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="mqtt.min.js"></script>
+    </head>
+    <body>
+        <header id="headbarr">
+            Big Data: UV Index with the Lego Spike Prime and PicoW
+        </header>
+        <script
+            type="mpy"
+            src="./main.py"
+            config="./pyscript.toml"
+            async
+        ></script>
+        <script src="app.js"></script>
+
+        <p>
+            You and your friends are planning to play frisbee in the park. You
+            need to know the UV index and temperature to make sure you are safe
+            and when the best time to play is between 9am and 5pm. You have a
+            Spike Prime and a UV sensor to help you with this task. You will use
+            the UV sensor to get the UV index and compare it to the local
+            weather station temperature. Then use Python and Google Colab to
+            analyze the data to find the best time to play with your friends.
+        </p>
+
+        <h2>Connect to Spike and Pico</h2>
+        <p>
+            First connect up to the Spike Prime in order to communicate to the
+            RoboPico. This will let us grab data on when the best time to play
+            frisbee is. Select hardware.py and then run the code!
+        </p>
+        <button id="connect">connect up</button>
+        <button id="library">load BLE library</button>
+        <progress id="progress" value="0" max="100" hidden>0%</progress>
+        <br /><br />
+        <select name="files" id="files"></select>
+        <button id="upload">Grab remote code</button>
+        <button id="clear">Clear</button>
+        <button id="test">BLE Test Code</button> <br /><br />
+        <div class="container">
+            <script id="mpCode" type="mpy-editor" env="ble"></script>
+            <div id="repl"></div>
+        </div>
+
+        <h2>Get Daily UV Data</h2>
+        <p>
+            Now that we have the UV data running. We need to compare it to the
+            the local temperature data from the nearest weather station. To do
+            this we will use data from an API. This will give use the
+            temperature for the local area. Look at both of these data sets to
+            see if they match up.
+        </p>
+        <canvas id="tempChart" width="400" height="200"></canvas>
+        <div id="uvData"></div>
+        <div id="otherData"></div>
+
+        <h2>Best Time to Play Frisbee Today!</h2>
+        <p>
+            Now that we have the UV data from the local weather station and the
+            UV data from the Spike Prime. We can compare the two data sets to
+            see how accurate the Spike Prime is and see if the UV index matches
+            the weather. First add the sensor data to the graph above using the
+            "Add Sensor Data" button. Next start playing with the data using the
+            "Start Analyzing" button to find the best time to play frisbee.
+        </p>
+        <button id="get_sensor_data">Graph Sensor Data</button>
+        <button id="to_python">Use Sensor Data</button>
+        <script type="py-editor" env="daily" config="matplotlib.toml">
+            ## Do Not Edit this Code! ##
+            ## Run this code to get the data from the sensor then move on to the next step. ##
+            from pyscript import window
+            import json
+
+            def process_uv_data():
+                uv_data_element = window.document.getElementById('uvData')
+                uv_data_json = uv_data_element.innerText
+
+                uv_data = json.loads(uv_data_json)
+
+                times_uv = [entry['time'] for entry in uv_data]
+                uv_indices = [float(entry['UV Index']) for entry in uv_data]
+
+                global time_list_uv
+                global uv_index_list
+                time_list_uv = times_uv
+                uv_index_list = uv_indices
+
+                print("Time List (UV):", time_list_uv)
+                print("UV Index List:", uv_index_list)
+
+            def process_other_data():
+                other_data_element = window.document.getElementById('otherData')
+                other_data_json = other_data_element.innerText
+
+                other_data = json.loads(other_data_json)
+
+                humidities = [entry['Humidity'] for entry in other_data]
+                temperatures = [entry['Temperature'] for entry in other_data]
+
+                global humidity_list
+                global temperature_list
+                humidity_list = humidities
+                temperature_list = temperatures
+
+                print("Humidity List:", humidity_list)
+                print("Temperature List:", temperature_list)
+
+            process_uv_data()
+            process_other_data()
+        </script>
+        <script type="py-editor" env="daily">
+            ## This is matplotlib code to plot the data try experimenting with the settings and find out what time is the best time to play frisbee. ##
+
+            import matplotlib.pyplot as plt
+            import numpy as np
+            from pyscript import display
+
+            ## Data for the plot
+            global time_list
+            global uv_index_list
+
+            ## Settings for the plot ##
+
+            plt.plot(time_list, uv_index_list, label='data!') # Change the label
+            plt.title('Sample Plot') # Change the Title!
+            plt.xlabel('Date and Time') # Change the x-axis label!
+            plt.ylabel('UV Index') # Change the y-axis label!
+
+            plt.legend()
+            plt.grid(True)
+
+            display(plt, target="graph_image")
+        </script>
+        <div id="graph_image"></div>
+
+        <h2>Best Day of Summer '24 to Play Frisbee</h2>
+        <p>
+            Continue to Google Colab to continue this activity and find the best
+            day of the summer to play frisbee. Use the data to find of the whole
+            summer from the API. Friday is the best day of the week to play
+            frisbee.
+        </p>
+        <button id="colab">Send to Google Colab</button>
+        <p>Click this link to continue in Google Colab...</p>
+        <a
+            href="https://colab.research.google.com/drive/1HWw_nLjtoi-3X9VJIM-opJcOlxqM7_yV?usp=sharing"
+            >To Colab!
+        </a>
+        <br /><br />
+        <br /><br />
+    </body>
+</html>
