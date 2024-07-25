@@ -8,4 +8,6 @@
 
 //github: https://github.com/ceeoinnovations/FETLabSummer2024/tree/cf61ad5613c845a36a05f22cd4f6df8297b7b71f/gps_spike_logger
 
+//pyscript page: https://pyscript.com/@emmettberryman/google-map-api/latest
+
 // if you have any questions here is my email: jonnyboytremain@gmail.com
