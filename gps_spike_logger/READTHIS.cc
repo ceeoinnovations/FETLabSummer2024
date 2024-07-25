@@ -1,8 +1,8 @@
-IF YOU ARE USING PYSCRIPT:
+//IF YOU ARE USING PYSCRIPT:
 
-Pyscript has trouble reading csv files so you are going to have to copy and paste your gps data into the wesite directly:
+//Pyscript has trouble reading csv files so you are going to have to copy and paste your gps data into the wesite directly:
 
-This is an example of how you want to do this:
+//This is an example of how you want to do this:
 
 
 <!DOCTYPE html>
