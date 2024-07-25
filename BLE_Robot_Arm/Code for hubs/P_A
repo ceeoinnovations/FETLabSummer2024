@@ -1,0 +1,124 @@
+import hub
+import bluetooth
+import time
+import struct
+from hub import light
+import color
+import motor
+from hub import port
+
+# Constants
+UART_SERVICE_UUID = bluetooth.UUID("6E400001-B5A3-F393-E0A9-E50E24DCCA9E")
+UART_RX_CHAR_UUID = bluetooth.UUID("6E400002-B5A3-F393-E0A9-E50E24DCCA9E")
+UART_TX_CHAR_UUID = bluetooth.UUID("6E400003-B5A3-F393-E0A9-E50E24DCCA9E")
+
+FLAG_WRITE = 0x0008
+FLAG_NOTIFY = 0x0010
+
+UART_SERVICE = (
+    UART_SERVICE_UUID,
+    (
+        (UART_TX_CHAR_UUID, FLAG_NOTIFY),
+        (UART_RX_CHAR_UUID, FLAG_WRITE),
+    ),
+)
+
+class BLESimplePeripheral:
+    def __init__(self, name="P_A"):
+        self._ble = bluetooth.BLE()
+        self._ble.active(True)
+        self._ble.irq(self._irq)
+        ((self._handle_tx, self._handle_rx),) = self._ble.gatts_register_services((UART_SERVICE,))
+        self._connections = set()
+        self._write_callback = None
+        self._payload = advertising_payload(name=name, services=[UART_SERVICE_UUID])
+        self._advertise()
+
+    def _irq(self, event, data):
+        if event == 1:  # _IRQ_CENTRAL_CONNECT
+            conn_handle, _, _ = data
+            print("New connection", conn_handle)
+            self._connections.add(conn_handle)
+        elif event == 2:  # _IRQ_CENTRAL_DISCONNECT
+            conn_handle, _, _ = data
+            print("Disconnected", conn_handle)
+            self._connections.remove(conn_handle)
+            self._advertise()
+        elif event == 3:  # _IRQ_GATTS_WRITE
+            conn_handle, value_handle = data
+            value = self._ble.gatts_read(value_handle)
+            if value_handle == self._handle_rx and self._write_callback:
+                self._write_callback(value)
+
+    def send(self, data):
+        for conn_handle in self._connections:
+            self._ble.gatts_notify(conn_handle, self._handle_tx, data)
+
+    def is_connected(self):
+        return len(self._connections) > 0
+
+    def _advertise(self, interval_us=500000):
+        self._ble.gap_advertise(interval_us, adv_data=self._payload)
+
+    def on_write(self, callback):
+        self._write_callback = callback
+
+def advertising_payload(name, services):
+    payload = bytearray()
+    payload.extend(struct.pack("B", len(name) + 1) + struct.pack("B", 0x09) + name.encode())
+    for uuid in services:
+        b = bytes(uuid)
+        payload.extend(struct.pack("B", len(b) + 1) + struct.pack("B", 0x07) + b)
+    return payload
+
+def main():
+    ble = BLESimplePeripheral(name="P_A")
+
+    def on_rx(data):
+        command = data.decode().strip()
+        print("Received command:", command)
+        
+        if command == 'Q':
+            motor.run(port.E, 250)
+            motor.run(port.F, 250)
+            print("Running motors E and F forward")
+        elif command == 'W':
+            motor.run(port.E, -250)
+            motor.run(port.F, -250)
+            print("Running motors E and F backward")
+        elif command == 'E':
+            motor.run(port.A, -250)
+            motor.run(port.B, 250)
+            motor.run(port.C, -250)
+            motor.run(port.D, 250)
+            print("Running motors A, B, C, D in pattern 1")
+        elif command == 'R':
+            motor.run(port.A, 250)
+            motor.run(port.B, -250)
+            motor.run(port.C, 250)
+            motor.run(port.D, -250)
+            print("Running motors A, B, C, D in pattern 2")
+        elif command == 'STOP':
+            motor.stop(port.A)
+            motor.stop(port.B)
+            motor.stop(port.C)
+            motor.stop(port.D)
+            motor.stop(port.E)
+            motor.stop(port.F)
+            print("Stopping all motors")
+        else:
+            print("Unknown command:", command)
+
+    ble.on_write(on_rx)
+
+    print("BLE peripheral started")
+
+    while True:
+        if ble.is_connected():
+            light.color(light.POWER, color.GREEN)
+        else:
+            light.color(light.POWER, color.BLUE)
+        time.sleep(0.1)
+
+if __name__ == "__main__":
+    main()
