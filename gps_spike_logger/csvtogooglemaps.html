@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta charset="utf-8">
+    <title>GPS Tracker rides again</title>
+    <style>
+      #map {
+        height: 100%;
+      }
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      function initMap() {
+        var mapOptions = {
+            zoom: 9,
+            center: {lat: 59.9428853, lng: 9.7596691},
+            mapTypeId: 'satellite'
+            };
+ 
+        var map = new google.maps.Map(document.getElementById('map'), mapOptions);
+ 
+        var Coordinates = [
+            {lat: 59.907119, lng: 10.616540},
+            {lat: 59.906688, lng: 10.614795},
+            {lat: 59.906250, lng: 10.613013},
+            {lat: 59.905811, lng: 10.611227},
+            {lat: 59.905372, lng: 10.609445},
+            {lat: 59.905036, lng: 10.607619},
+            {lat: 59.904830, lng: 10.605690},
+            {lat: 59.904644, lng: 10.603758},
+            {lat: 59.904373, lng: 10.601884},
+            {lat: 59.904026, lng: 10.600152},
+            {lat: 59.903663, lng: 10.598505},
+            {lat: 59.903305, lng: 10.596847},
+            {lat: 59.902935, lng: 10.595170},
+            {lat: 59.902545, lng: 10.593497},
+            {lat: 59.902133, lng: 10.591789},
+            {lat: 59.901737, lng: 10.590107},
+            {lat: 59.901336, lng: 10.588444},
+            {lat: 59.900882, lng: 10.586405},
+            {lat: 59.900608, lng: 10.584630},
+            {lat: 59.900398, lng: 10.582856},
+            {lat: 59.900211, lng: 10.581173},
+            {lat: 59.900012, lng: 10.579549},
+            {lat: 59.899734, lng: 10.577942},
+            {lat: 59.899353, lng: 10.576371},
+            {lat: 59.898883, lng: 10.574804},
+            {lat: 59.898464, lng: 10.573148},
+            {lat: 59.898170, lng: 10.571420},
+            {lat: 59.897949, lng: 10.569655},
+            {lat: 59.897670, lng: 10.567923},
+            {lat: 59.897304, lng: 10.566239},
+            {lat: 59.896949, lng: 10.564560},
+            {lat: 59.896633, lng: 10.562848},
+            {lat: 59.896327, lng: 10.561136},
+            {lat: 59.896015, lng: 10.559419},
+            {lat: 59.895706, lng: 10.557694}
+           //Shortened for code brevity
+        ];
+        var Path = new google.maps.Polyline({
+          path: Coordinates,
+          geodesic: true,
+          strokeColor: '#FF0000',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+ 
+        Path.setMap(map);
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=YOURAPIKEY&callback=initMap">
+    //Add your own google API Key above
+    </script>
+  </body>
+</html>
