@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Live Particle Positioning on Spike</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.6.2/core.css">
+    <script type="module" src="https://pyscript.net/releases/2024.6.2/core.js"></script>
+    <script type="mpy" src="./main.py" config="./pyscript.toml"></script>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <script src="pathCalc.js"></script>
+    <script src="script.js"></script>
+    <div class="flex-container">
+        <div class="box left">
+            <p>Make sure
+            <a href="https://github.com/chrisbuerginrogers/SPIKE_Prime/blob/main/BLE/BLE_CEEO.py#L1" rel="noopener noreferrer" target="_blank">BLE_CEEO.py </a>
+            is installed on your Spike Prime (Do this using Thonny or another Python IDE).</p>
+
+            <div class="wrap">
+                <h2 class="num">1</h2><button class="text" id="connect">Connect the Spike</button>
+            </div>
+            <div class="wrap">
+                <h2 class="num">2</h2><button class="text inactive" id="library">Load the BLE Library</button>
+                <div class="progress-container">
+                    <progress id="progress" value="0" max="100"></progress>
+                    <span class="progress-text" id="progress-percent">0%</span>
+                </div>
+            </div>
+            <div class="wrap">
+                <h2 class="num">3</h2><button class="text inactive" id="ble_connect">Connect via BLE</button>
+            </div>
+
+            <div class="mpCode_container">
+                <script id='mpCode' type="mpy-editor" env="ble" ></script>
+                <div id="repl"></div>
+            </div>
+
+            <br>
+
+            <div class="ble_info">
+                BLE Name: <input type="text" id='ble_name' maxlength="50" style = 'color:darkblue;border: none;background-color:lightlightgray;' value='Spike'>
+
+                <!--<textarea id='ble_info'>To send</textarea>
+                <button id="send_ble">Send</button><br>-->
+                Latest from BLE:
+                <div style='color:darkblue;' id='ble_answer'>None</div>
+            </div>
+            <br>
+            <!--<button id="stop">Stop the simulation</button>-->
+        </div>
+        <div class="box right" style="text-align: center;">
+            <h3 id="update-text"></h3>
+
+            <div class="grid-container">
+                <button id="rotate-ccw" class="rotate-btn">↺</button>
+                <div class="sim-frame-frame">
+                    <div class="sim-frame">
+                        <div id="simulation" class="simulation">
+                            <div id="grid-container"></div>
+                            <canvas id="animationCanvas"></canvas>
+                            <div id="direction-indicator">↑</div>
+                        </div>
+                    </div>
+                </div>
+                <button id="rotate-cw" class="rotate-btn">↻</button>
+            </div>
+
+            <br>
+            
+            <div class="toggle-switch" id="toggleMode" onclick="window.toggleBallControlMode()">
+                <div class="slider">
+                    <span class="icon coordinate-icon">x, y</span>
+                    <span class="icon sensor-icon">y, p, r</span>
+                </div>
+            </div>
+
+            <div id="popup" class="popup">
+                <p>Would you like to find the path?</p>
+                <button id="yesButton">Yes</button>
+                <button id="noButton">No</button>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

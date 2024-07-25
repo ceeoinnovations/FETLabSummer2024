@@ -1,0 +1,398 @@
+body{
+  font-family: monospace;
+  background-color: black;
+}
+
+h2.num{
+  width: 25px;
+  height: 25px;
+  margin-right: 2px;
+  border-radius: 25px;
+  background-color: #35c1f0;
+  text-align: center;
+  color: white;
+  padding: 2px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+}
+.wrap {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.wrap p, .wrap a {
+  margin: 0;
+  padding: 0;
+}
+
+button.text {
+  font-family: inherit; /* Inherit from body */
+  font-size: 2em;
+  margin: 0.67em 0;
+  font-weight: bold;
+  text-align: center; /* Center text alignment */
+  color: black;
+  border: none; /* Remove default button border */
+  cursor: pointer; /* Change cursor to pointer when hovering */
+  background-color: transparent;
+  text-decoration: none;
+}
+
+button.text:hover {
+  text-decoration: underline; /* Optional: change color on hover */
+}
+
+button.text.inactive{
+  color: gray;
+}
+
+.mpCode_container, .ble_info{
+  display: block;
+  overflow-y: scroll;
+}
+
+#repl{
+  max-height: 300px;
+}
+
+.flex-container {
+  height: 95vh;
+  display: flex;
+  gap: 7px;
+  overflow: hidden; 
+  padding: 7px;
+  border-radius: 5px;
+  background-color: #aed1e6;
+}
+
+.box{
+  padding: 5px;
+  border-radius: 5px;
+  height: calc(100% - 10px); /* Subtracting top and bottom padding */
+  background-color: #cfe8ef;
+  /* margin-bottom: 7px;  */
+}
+
+.box.left {
+  flex: 2;
+  position: relative;
+}
+
+.box.right {
+  width: 70vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+}
+
+h3 {
+  font-size: 2em;
+  font-weight: 600;
+  color: #3d3b34;
+}
+
+progress {
+  width: 100%;
+  height: 30px;
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  border-radius: 15px;
+  background-color: #f0f0f0;
+  position: relative;
+  overflow: hidden;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #f0f0f0;
+  border-radius: 15px;
+}
+
+progress::-webkit-progress-value {
+  background-color: #3498db;
+  border-radius: 15px;
+  transition: width 0.5s ease;
+}
+
+progress::-moz-progress-bar {
+  background-color: #3498db;
+  border-radius: 15px;
+  transition: width 0.5s ease;
+}
+
+.progress-container {
+  margin-left: 25px;
+  position: relative;
+  width: 300px; /* Adjust as needed */
+}
+
+.progress-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/*-----------------SIMULATION-----------------*/
+
+.sim-frame-frame{
+  width: 520px;
+  height: 520px;
+  border-radius: 10px;
+  background-color: #3d3b34;
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  align-items: center;
+}
+
+.sim-frame {
+  width: 500px;
+  height: 500px;
+  background-color: gray;
+  margin: auto;
+}
+
+.simulation {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  background-color: gray;
+}
+
+/*--------------------------------GRID-----------------------------*/
+
+.grid-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  padding: 2px;
+  border-radius: 5px;
+}
+
+#grid-container {
+  display: grid;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* .grid-cell {
+  border: 2px solid #030202;
+  transition: background-color 0.3s;
+} */
+
+.grid-cell {
+  border: 1px solid #3d3b34;
+  aspect-ratio: 1;
+  position: relative;
+  transition: background-color 0.3s;
+  z-index: 0;
+}
+
+.grid-cell:hover {
+  background-color: rgba(224, 224, 224, 0.5);
+}
+
+.grid-cell.selected {
+  background-color: rgba(52, 152, 219, 0.5);
+}
+
+/* .grid-node {
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  background-color: #3d3b34;
+  transition: background-color 0.3s;
+  cursor: pointer;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 0;
+} */
+
+.grid-node {
+  width: 20px;
+  height: 20px;
+  background-color: #3d3b34;
+  border-radius: 50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  z-index: 6;
+}
+
+.wall-space {
+  position: absolute;
+  background-color: transparent;
+  transition: background-color 0.3s;
+  background-color: none;
+  z-index: 3;
+}
+
+.wall-space:hover {
+  background-color: #3d3b34;
+  cursor: pointer;
+}
+
+.wall-space.wall {
+  background-color: #3d3b34;
+}
+
+.wall-space.horizontal {
+  height: 8px;
+  width: 100%;
+  top: -4px;
+  left: 0;
+}
+
+.wall-space.vertical {
+  width: 8px;
+  height: 100%;
+  left: -4px;
+  top: 0;
+}
+
+.grid-cell.start {
+  background-color: #db3434;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  z-index: 0;
+}
+
+.grid-cell.end {
+  background-color: #2ecc71;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  z-index: 0;
+}
+
+#animationCanvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* This allows clicks to pass through to the grid cells */
+  z-index: 4;
+}
+
+/*-------------------------Toggle button---------------------------*/
+.toggle-switch {
+  width: 60px;
+  height: 30px;
+  background-color: #3498db;
+  border-radius: 15px;
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.slider {
+  width: 200%;
+  height: 100%;
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.icon {
+  width: 50%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: white;
+  font-weight: 900;
+}
+
+.sensor-icon {
+  background-color: #2980b9;
+  border-radius: 15px;
+}
+
+.coordinate-icon {
+  background-color: #3498db;
+}
+
+/*-------------------------------Grid Rotation Arrows----------------------------------*/
+
+.rotate-btn {
+  background: none;
+  border: none;
+  color: #2980b9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  font-size: 24px;
+  font-weight: 200;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+#rotate-cw:hover {
+  transform: rotate(90deg);
+  font-weight: 900;
+}
+
+#rotate-cw:active {
+  transform: rotate(90deg) scale(0.95);
+}
+
+#rotate-ccw:hover {
+  transform: rotate(-90deg);
+  font-weight: 900;
+}
+
+#rotate-ccw:active {
+  transform: rotate(-90deg) scale(0.95);
+}
+
+#direction-indicator {
+  position: absolute;
+  top: 47.5%;
+  left: 49%;
+  font-size: 24px;
+  font-weight: 800;
+  color: #3d3b34;
+}
+
+/*---------------------------------Popup---------------------------------*/
+.popup {
+  display: none;
+  position: absolute;
+  transform: translate(0%, 275%);
+  background-color: white;
+  border: 2px solid black;
+  padding: 20px;
+  z-index: 1000;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+.popup.fade-in {
+  display: block;
+  opacity: 1;
+}
+
+.popup.fade-out {
+  opacity: 0;
+}
