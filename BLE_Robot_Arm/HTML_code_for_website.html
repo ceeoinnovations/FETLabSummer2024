@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Arm Control Interface</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .hub-controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .hub {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        button {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        input {
+            margin: 5px;
+            padding: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Robot Arm Control Interface</h1>
+    <div class="hub-controls">
+        <div class="hub" id="P_A">
+            <h2>SPIKE Prime (P_A)</h2>
+            <input type="text" id="nameP_A" placeholder="Enter device name">
+            <button id="connectP_A">Connect</button>
+            <div>
+                <button data-hub="P_A" data-key="Q">Q (shoulder_pan+)</button>
+                <button data-hub="P_A" data-key="W">W (shoulder_pan-)</button>
+                <button data-hub="P_A" data-key="E">E (shoulder_lift+)</button>
+                <button data-hub="P_A" data-key="R">R (shoulder_lift-)</button>
+            </div>
+        </div>
+        <div class="hub" id="E_1">
+            <h2>SPIKE Essential 1 (E_1)</h2>
+            <input type="text" id="nameE_1" placeholder="Enter device name">
+            <button id="connectE_1">Connect</button>
+            <div>
+                <button data-hub="E_1" data-key="A">A (elbow+)</button>
+                <button data-hub="E_1" data-key="S">S (elbow-)</button>
+            </div>
+        </div>
+        <div class="hub" id="E_2">
+            <h2>SPIKE Essential 2 (E_2)</h2>
+            <input type="text" id="nameE_2" placeholder="Enter device name">
+            <button id="connectE_2">Connect</button>
+            <div>
+                <button data-hub="E_2" data-key="D">D (wrist_1+)</button>
+                <button data-hub="E_2" data-key="F">F (wrist_1-)</button>
+            </div>
+        </div>
+        <div class="hub" id="E_3">
+            <h2>SPIKE Essential 3 (E_3)</h2>
+            <input type="text" id="nameE_3" placeholder="Enter device name">
+            <button id="connectE_3">Connect</button>
+            <div>
+                <button data-hub="E_3" data-key="Z">Z (wrist_2+)</button>
+                <button data-hub="E_3" data-key="X">X (wrist_2-)</button>
+            </div>
+        </div>
+        <div class="hub" id="E_4">
+            <h2>SPIKE Essential 4 (E_4)</h2>
+            <input type="text" id="nameE_4" placeholder="Enter device name">
+            <button id="connectE_4">Connect</button>
+            <div>
+                <button data-hub="E_4" data-key="C">C (wrist_3+)</button>
+                <button data-hub="E_4" data-key="V">V (wrist_3-)</button>
+                <button data-hub="E_4" data-key="T">T (claw open)</button>
+                <button data-hub="E_4" data-key="Y">Y (claw close)</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const UART_SERVICE_UUID = "6e400001-b5a3-f393-e0a9-e50e24dcca9e";
+        const UART_RX_CHAR_UUID = "6e400002-b5a3-f393-e0a9-e50e24dcca9e";
+
+        const hubs = {
+            P_A: { device: null, characteristic: null },
+            E_1: { device: null, characteristic: null },
+            E_2: { device: null, characteristic: null },
+            E_3: { device: null, characteristic: null },
+            E_4: { device: null, characteristic: null }
+        };
+
+        async function connectBluetooth(hubName) {
+            const deviceName = document.getElementById(`name${hubName}`).value.trim();
+            if (!deviceName) {
+                alert("Please enter a device name");
+                return;
+            }
+
+            try {
+                const device = await navigator.bluetooth.requestDevice({
+                    filters: [{ name: deviceName }],
+                    optionalServices: [UART_SERVICE_UUID]
+                });
+
+                const server = await device.gatt.connect();
+                const service = await server.getPrimaryService(UART_SERVICE_UUID);
+                const characteristic = await service.getCharacteristic(UART_RX_CHAR_UUID);
+
+                hubs[hubName].device = device;
+                hubs[hubName].characteristic = characteristic;
+
+                console.log(`Connected to ${hubName} (${deviceName})`);
+                document.getElementById(`connect${hubName}`).textContent = "Connected";
+                document.getElementById(`connect${hubName}`).disabled = true;
+            } catch (error) {
+                console.error(`Bluetooth connection failed for ${hubName}:`, error);
+                alert(`Connection failed for ${hubName}. Please check the device name and try again.`);
+            }
+        }
+
+        async function sendCommand(hubName, command) {
+            const hub = hubs[hubName];
+            if (hub.characteristic) {
+                try {
+                    await hub.characteristic.writeValue(new TextEncoder().encode(command));
+                    console.log(`Sent command to ${hubName}:`, command);
+                } catch (error) {
+                    console.error(`Error sending command to ${hubName}:`, error);
+                }
+            } else {
+                console.error(`${hubName} is not connected`);
+            }
+        }
+
+        // Set up connect buttons
+        Object.keys(hubs).forEach(hubName => {
+            document.getElementById(`connect${hubName}`).addEventListener('click', () => connectBluetooth(hubName));
+        });
+
+        // Set up control buttons
+        document.querySelectorAll('button[data-hub][data-key]').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                const hubName = button.getAttribute('data-hub');
+                const key = button.getAttribute('data-key');
+                sendCommand(hubName, key);
+            });
+
+            button.addEventListener('mouseup', () => {
+                const hubName = button.getAttribute('data-hub');
+                sendCommand(hubName, 'STOP');
+            });
+
+            button.addEventListener('mouseleave', () => {
+                const hubName = button.getAttribute('data-hub');
+                sendCommand(hubName, 'STOP');
+            });
+        });
+
+        // Keyboard controls
+        const keyMap = {
+            'q': { hub: 'P_A', key: 'Q' },
+            'w': { hub: 'P_A', key: 'W' },
+            'e': { hub: 'P_A', key: 'E' },
+            'r': { hub: 'P_A', key: 'R' },
+            'a': { hub: 'E_1', key: 'A' },
+            's': { hub: 'E_1', key: 'S' },
+            'd': { hub: 'E_2', key: 'D' },
+            'f': { hub: 'E_2', key: 'F' },
+            'z': { hub: 'E_3', key: 'Z' },
+            'x': { hub: 'E_3', key: 'X' },
+            'c': { hub: 'E_4', key: 'C' },
+            'v': { hub: 'E_4', key: 'V' },
+            't': { hub: 'E_4', key: 'T' },
+            'y': { hub: 'E_4', key: 'Y' }
+        };
+
+        let inputsFocused = false;
+
+        // Add event listeners to all input fields
+        document.querySelectorAll('input[type="text"]').forEach(input => {
+            input.addEventListener('focus', () => {
+                inputsFocused = true;
+            });
+            input.addEventListener('blur', () => {
+                inputsFocused = false;
+            });
+        });
+
+        // Modify the keydown event listener
+        document.addEventListener('keydown', (event) => {
+            if (!inputsFocused) {
+                const mapping = keyMap[event.key.toLowerCase()];
+                if (mapping) {
+                    sendCommand(mapping.hub, mapping.key);
+                    event.preventDefault();
+                }
+            }
+        });
+
+        // Modify the keyup event listener
+        document.addEventListener('keyup', (event) => {
+            if (!inputsFocused) {
+                const mapping = keyMap[event.key.toLowerCase()];
+                if (mapping) {
+                    sendCommand(mapping.hub, 'STOP');
+                    event.preventDefault();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
