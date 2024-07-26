@@ -1,97 +1,138 @@
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
-/* this is for the map on pyscript */
+/* Import Google Fonts for an Among Us look */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+/* Reset and base styles */
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
-    font-family: 'Bebas Neue', sans-serif;
-    background: linear-gradient(135deg, #ff4e50, #f9d423);
-    color: #fff;
+    font-family: 'Roboto', sans-serif;
+    background-color: #000000;
+    color: #ffffff;
+    overflow-x: hidden;
 }
 
+/* Space background with stars */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+        radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+        radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px);
+    background-size: 550px 550px, 350px 350px, 250px 250px;
+    background-position: 0 0, 40px 60px, 130px 270px;
+    animation: twinkle 10s linear infinite;
+    z-index: -1;
+}
+
+@keyframes twinkle {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100%); }
+}
+
+/* Among Us themed map container */
 #map {
     height: 80vh;
     width: 90%;
-    border: 3px solid #fff;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    border: 4px solid #00ffff;
+    box-shadow: 0 0 20px #00ffff, 0 0 40px #00ffff;
     margin: 40px auto;
     max-width: 1200px;
-    border-radius: 15px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 20px;
     position: relative;
-    z-index: 1;
+    overflow: hidden;
+    transition: all 0.3s ease;
 }
 
 #map:hover {
-    transform: scale(1.1);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.7);
+    transform: scale(1.02);
+    box-shadow: 0 0 30px #00ffff, 0 0 60px #00ffff;
 }
 
-#map:before {
+/* Among Us character overlay */
+#map::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    border-radius: 15px;
-    background: linear-gradient(45deg, rgba(255, 255, 255, 0.4), rgba(255, 255, 255, 0));
-    z-index: -1;
-    filter: blur(15px);
-    opacity: 0.8;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 80px;
+    background: #ff0000;
+    border-radius: 50% 50% 0 0;
+    box-shadow: 0 0 10px #ff0000;
+    animation: float 3s ease-in-out infinite;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    overflow: hidden; /* Prevent scrollbars */
+#map::before {
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    right: 35px;
+    width: 30px;
+    height: 40px;
+    background: #add8e6;
+    border-radius: 50%;
+    z-index: 1;
 }
 
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Epic title styling */
 h1 {
+    font-family: 'Roboto', sans-serif;
     font-size: 48px;
     font-weight: bold;
     text-transform: uppercase;
     letter-spacing: 3px;
-    margin: 20px 0;
-    color: #fff;
-    text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.6);
-    animation: neon-glow 1.5s infinite alternate;
+    margin: 30px 0;
+    color: #ff0000;
+    text-shadow: 2px 2px 0 #00ffff, 4px 4px 0 #ffffff;
+    text-align: center;
 }
 
-h1:after {
-    content: '';
-    display: block;
-    width: 70px;
-    height: 6px;
-    background: #fff;
-    margin: 10px auto;
-    border-radius: 3px;
+/* Emergency Meeting button */
+body::after {
+    content: 'EMERGENCY\A MEETING';
+    white-space: pre;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #ff0000;
+    padding: 10px 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ff0000;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
-@keyframes neon-glow {
-    from {
-        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #ff4e50, 0 0 40px #ff4e50, 0 0 50px #ff4e50, 0 0 60px #ff4e50, 0 0 70px #ff4e50;
-    }
-    to {
-        text-shadow: 0 0 20px #fff, 0 0 30px #ff4e50, 0 0 40px #ff4e50, 0 0 50px #ff4e50, 0 0 60px #ff4e50, 0 0 70px #ff4e50, 0 0 80px #ff4e50;
-    }
+body::after:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 20px #ff0000;
 }
 
-@keyframes background-animation {
-    0% {
-        background-position: 0% 50%;
+/* Responsive design */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 36px;
     }
-    50% {
-        background-position: 100% 50%;
+    
+    #map {
+        height: 70vh;
     }
-    100% {
-        background-position: 0% 50%;
+    
+    body::after {
+        font-size: 18px;
+        padding: 8px 16px;
     }
-}
-
-body, html {
-    animation: background-animation 10s ease infinite;
 }
