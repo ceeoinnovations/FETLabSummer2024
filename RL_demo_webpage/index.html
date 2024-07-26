@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>RL webpage</title>
+
+    <!-- Recommended meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <!-- PyScript CSS -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.6.2/core.css">
+
+    <!-- This script tag bootstraps PyScript -->
+    <script type="module" src="https://pyscript.net/releases/2024.6.2/core.js"></script>
+     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Color Picker</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href='https://fonts.googleapis.com/css?family=Bagel Fat One' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Yusei Magic' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Balsamiq Sans' rel='stylesheet'>
+    <link href='https://fonts.googleapis.com/css?family=Mochiy Pop One' rel='stylesheet'>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <!-- PyScript CSS -->
+    <link rel="stylesheet" href="https://pyscript.net/releases/2024.6.2/core.css">
+
+    <!-- This script tag bootstraps PyScript -->
+    <script type="module" src="https://pyscript.net/releases/2024.6.2/core.js"></script>
+</head>
+<body>
+
+    <h1> Program your robot! </h1>
+    <p1> Beginning state </p1>
+     <div id="colorBox"></div>
+    <div id="colorBox2"></div>
+    <div id="colorBox3"></div>
+    <div id="colorBox4"></div>
+   
+
+    
+    <div>
+        
+        <label for="colorPicker">1st color:</label>
+        <select id="colorPicker">
+            <option value="...">...</option>
+            <option value="black">Black</option>
+            <option value="magenta">Magenta</option>
+            <option value="blue">Blue</option>
+            <option value="#9cfdff">Azure</option>
+            <option value="green">Green</option>
+            <option value="yellow">Yellow</option>
+            <option value="red">Red</option>
+            <option value="white">White</option>
+        </select>
+    </div>
+
+      <div>
+        
+        <label for="colorPicker2">2nd color</label>
+        <select id="colorPicker2">
+            <option value="...">...</option>
+            <option value="black">Black</option>
+            <option value="magenta">Magenta</option>
+            <option value="blue">Blue</option>
+            <option value="#9cfdff">Azure</option>
+            <option value="green">Green</option>
+            <option value="yellow">Yellow</option>
+            <option value="red">Red</option>
+            <option value="white">White</option>
+        </select>
+    </div>
+
+    <div>
+        
+        <label for="colorPicker3">3rd color</label>
+        <select id="colorPicker3">
+            <option value="...">...</option>
+            <option value="black">Black</option>
+            <option value="magenta">Magenta</option>
+            <option value="blue">Blue</option>
+            <option value="#9cfdff">Azure</option>
+            <option value="green">Green</option>
+            <option value="yellow">Yellow</option>
+            <option value="red">Red</option>
+            <option value="white">White</option>
+        </select>
+    </div>
+
+    <div>
+        
+        <label for="colorPicker4">4th color</label>
+        <select id="colorPicker4">
+            <option value="...">...</option>
+            <option value="black">Black</option>
+            <option value="magenta">Magenta</option>
+            <option value="blue">Blue</option>
+            <option value="#9cfdff">Azure</option>
+            <option value="green">Green</option>
+            <option value="yellow">Yellow</option>
+            <option value="red">Red</option>
+            <option value="white">White</option>
+        </select>
+    </div>
+    
+    <h2>Testing Serial</h2>
+    <div style="margin-left: 60%; height: 200px;">
+        <script type="mpy" src="./main.py" config="./pyscript.toml" ></script>
+        <button id="connect">connect up</button>
+        <button id="rl_code">run RL code</button>
+        <!--<button id="move_motor">Move Motor</button>
+        <button id="stop_motor">Stop Motor</button>-->
+        <button id="get_color">color sensor value</button>
+        <div id="sensor-info" ></div>
+    <progress id="progress" value="0" max="100"> 0% </progress>    <br><br>
+    <!--<select name="files" id="files"> </select>     <br><br>
+    <script id='python' type="mpy-editor" env="ble" ></script-->
+    <pre id="output"></pre>
+    <div id="repl"></div>
+
+    </div>
+
+     <div class="content">
+        
+    </div>
+
+    <hr class="divider">
+
+    <div class="content">
+        <h3>Output: </h3>
+    </div> 
+
+    <p2> Color</p2>
+    <p3> Action </p3>
+    <p4> Reward </p4>
+
+    <style>
+        
+.vl {
+  border-left: 5px solid #d197a3;
+  height: 370px;
+}
+</style>
+
+<div class="vl"></div>
+   
+
+    <script src="script.js"></script> 
+<!--<div class="colorWrap">
+    <div class="colorClass" id="colorOutput"></div>
+</div>-->
+<div id="colorOutput"></div>
+<div id="actionOutput"></div>
+<div id="rewardOutput"></div>
+
+
+</body>
+
+    
+</html>
