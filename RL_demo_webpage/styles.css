@@ -1,0 +1,237 @@
+body { 
+    background-color: #ffe3e4;
+    margin: 20px;
+}
+
+h1 {
+    background-color: #fff5f7;
+    border: 4px solid #e0b4bd;
+    border-radius: 12px;
+    padding-left: 100px;
+    padding-top: 50px;
+    padding-right: 100px;
+    padding-bottom: 50px;
+    font-family: 'Mochiy Pop One';font-size: 80px;
+    text-align: center;
+    color: #d197a3;
+}
+
+h2 {
+    margin-left: 60%;
+    margin-top: -200px;
+    font-family: 'Yusei Magic';font-size: 50px;
+    color: #d197a3;
+}
+
+h3{
+    font-family: 'Yusei Magic';font-size: 40px;
+    color: #b3707f;
+}
+
+p1{
+    font-family: 'Balsamiq Sans';font-size: 17px;
+}
+
+p2 {
+    font-family: 'Balsamiq Sans';font-size: 25px;
+    margin-left: 410px;
+}
+
+p3 {
+    font-family: 'Balsamiq Sans';font-size: 25px;
+    margin-left: 100px;
+}
+
+p4 {
+    font-family: 'Balsamiq Sans';font-size: 25px;
+    margin-left: 725px;
+    margin-top: -5000px;
+}
+
+#colorPicker {
+    margin-top: 20px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-family: 'Balsamiq Sans';font-size: 12px;
+}
+
+#colorPicker2 {
+    #margin-top: -100px;
+    #margin-left: 160px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-family: 'Balsamiq Sans';font-size: 12px;
+    
+}
+
+#colorPicker3 {
+    #margin-top: -90px;
+    #margin-left: 300px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-family: 'Balsamiq Sans';font-size: 12px;
+}
+
+#colorPicker4 {
+    #margin-top: -130px;
+    #margin-left: 450px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    font-family: 'Balsamiq Sans';font-size: 12px;
+}
+
+#colorBox {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    border: 2px solid #000;
+}
+
+#colorBox2 {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    border: 2px solid #000;
+    margin-top: -103px;
+    margin-left: 140px;
+    
+}
+
+#colorBox3 {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    border: 2px solid #000;
+    margin-top: -103px;
+    margin-left: 280px;
+}
+
+#colorBox4 {
+    width: 100px;
+    height: 100px;
+    margin-top: 20px;
+    border: 2px solid #000;
+    margin-top: -103px;
+    margin-left: 420px;
+}
+
+
+.divider {
+    border: 0;
+    height: 5px;
+    border-radius: 12px;
+    background: #d197a3;
+}
+
+.content {
+    text-align: center;
+    font-size: 10px;
+    color: #d197a3;
+}
+
+#connect {
+  background-color: #fff5f7; 
+  border: 2px solid #e0b4bd;
+  border-radius: 12px;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Balsamiq Sans';font-size: 16px;
+}
+
+/*#move_motor {
+  background-color: #fff5f7; 
+  border: 2px solid #e0b4bd;
+  border-radius: 12px;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Balsamiq Sans';font-size: 16px;
+}
+
+#stop_motor {
+  background-color: #fff5f7; 
+  border: 2px solid #e0b4bd;
+  border-radius: 12px;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Balsamiq Sans';font-size: 16px;
+}*/
+
+#get_color {
+  background-color: #fff5f7; 
+  border: 2px solid #e0b4bd;
+  border-radius: 12px;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Balsamiq Sans';font-size: 16px;
+}
+
+#rl_code {
+  background-color: #fff5f7; 
+  border: 2px solid #e0b4bd;
+  border-radius: 12px;
+  color: black;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-family: 'Balsamiq Sans';font-size: 16px;
+}
+
+
+.vl {
+  border-left: 3px solid #d197a3;
+  height: 500px;
+  position: absolute;
+  left: 50%;
+  margin-left: -3px;
+  margin-top: 290px;
+  top: 0;
+  color: #ebccd3;
+  border-radius: 12px;
+}
+
+#repl {
+    display: block;
+}
+
+#colorOutput {
+    width: 100px;
+    height: 300px;
+    background-color: #fff5f7;
+    margin-top: 20px;
+    margin-left: 390px;
+    border-radius: 12px;
+    border: 4px solid #e0b4bd;
+}
+
+#actionOutput {
+    width: 100px;
+    height: 300px;
+    background-color: #fff5f7;
+    margin-top: -307.5px;
+    margin-left: 555px;
+    border-radius: 12px;
+    border: 4px solid #e0b4bd;
+}
+
+#rewardOutput {
+    width: 100px;
+    height: 300px;
+    background-color: #fff5f7;
+    margin-top: -307.5px;
+    margin-left: 715px;
+    border-radius: 12px;
+    border: 4px solid #e0b4bd;
+}
