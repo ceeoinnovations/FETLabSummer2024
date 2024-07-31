@@ -1,0 +1,199 @@
+<?xml version="1.0"?> 
+<robot name="ballbeam">
+    <!-- Base Frame of Beam --> 
+    <material name="black">
+        <color rgba="0 0 0 1"/>
+    </material>
+    <material name="blue">
+        <color rgba="0.6 0.7 0.8 1"/>
+    </material>
+
+    <!--Bottom plane-->
+    <link name="base_link">
+        <visual> 
+            <geometry> 
+                <box size="1 1 0.02"/>
+            </geometry>
+            <material name="blue"/>
+        </visual> 
+        <collision> 
+            <geometry> 
+                <box size="1 1 0.02"/>
+            </geometry>
+            <material name="blue"/>
+        </collision> 
+        <inertial> 
+            <mass value="6"/>
+            <inertia ixx="0.5002" ixy="0" ixz="0" iyy="0.5002" iyz="0.0" izz="1"/>
+        </inertial> 
+    </link>
+
+    <!-- Left Rod -->
+    <link name="left_rod">
+        <visual>
+            <geometry>
+                <box size="0.03 0.1 0.5"/>
+            </geometry>
+            <origin rpy="0 0 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.03 0.1 0.5"/>
+            </geometry>
+            <origin rpy="0 0 0"/>
+        </collision>
+        <inertial> 
+            <mass value="2"/>
+            <inertia ixx="0.043" ixy="0" ixz="0" iyy="0.042" iyz="0.0" izz="0.002"/>
+        </inertial> 
+    </link>
+
+    <joint name="base_to_left_rod" type="fixed">
+        <parent link="base_link"/>
+        <child link="left_rod"/>
+        <origin xyz="-0.40 0 0.1"/>
+    </joint>
+
+    <!-- Center Beam -->
+    <link name="center_beam">
+        <visual>
+            <geometry>
+                <box size="0.02 0.1 0.75"/>
+            </geometry>
+            <origin xyz="0.32 0 0.1 " rpy="0 1.57075 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.02 0.1 0.75"/>
+            </geometry>
+            <origin xyz="0.32 0 0.1 " rpy="0 1.57075 0"/>
+        </collision>
+        <inertial> 
+            <mass value="0.5"/>
+            <inertia ixx="0.024" ixy="0" ixz="0" iyy="0.024" iyz="0.0" izz="0.0004"/>
+        </inertial>
+
+    </link>
+
+    <!-- Right Track -->
+    <link name="right_track">
+        <visual>
+            <geometry>
+                <box size="0.02 0.02 0.75"/>
+            </geometry>
+            <origin xyz="0.32 0 0.1 " rpy="0 1.57075 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.02 0.02 0.75"/>
+            </geometry>
+            <origin xyz="0.32 0 0.1 " rpy="0 1.57075 0"/>
+        </collision>
+         <inertial> 
+            <mass value="0.25"/>
+            <inertia ixx="0.012" ixy="0" ixz="0" iyy="0.012" iyz="0.0" izz="1.67"/>
+        </inertial>
+
+    </link>
+
+    <!-- Left Track -->
+    <link name="left_track">
+        <visual>
+            <geometry>
+                <box size="0.02 0.02 0.75"/>
+            </geometry>
+            <origin xyz="0.32 0 0.1 " rpy="0 1.57075 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.02 0.02 0.75"/>
+            </geometry>
+            <origin xyz="0.32 0 0.1 " rpy="0 1.57075 0"/>
+        </collision>
+         <inertial> 
+            <mass value="0.25"/>
+            <inertia ixx="0.012" ixy="0" ixz="0" iyy="0.012" iyz="0.0" izz="1.67"/>
+        </inertial>
+
+    </link>
+
+    <!-- Right Track Joint w Center Beam-->
+    <joint name="right_track_center_beam" type="fixed">
+        <parent link="center_beam"/>
+        <child link="right_track"/>
+        <axis xyz="0 1 0"/>
+        <origin xyz="0 -0.04 0.01"/>
+    </joint>
+
+     <!-- Left Track Joint w Center Beam-->
+    <joint name="left_track_center_beam" type="fixed">
+        <parent link="center_beam"/>
+        <child link="left_track"/>
+        <axis xyz="0 1 0"/>
+        <origin xyz="0 0.04 0.01"/>
+    </joint>
+
+    <!-- Stopper -->
+    <link name="left_stopper">
+        <visual>
+            <geometry>
+                <box size="0.01 0.1 0.06"/>
+            </geometry>
+            <origin xyz="-0.05 0 0.1 " rpy="0 0 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.01 0.1 0.06"/>
+            </geometry>
+            <origin xyz="-0.05 0 0.1 " rpy="0 0 0"/>
+        </collision>
+         <inertial> 
+            <mass value="0.125"/>
+            <inertia ixx="0.00014" ixy="0" ixz="0" iyy="3.85" iyz="0.0" izz="0.0001"/>
+        </inertial>
+    </link>
+
+    <!-- Stopper -->
+    <link name="right_stopper">
+        <visual>
+            <geometry>
+                <box size="0.01 0.1 0.06"/>
+            </geometry>
+            <origin xyz="0.32 0 0.1 " rpy="0 0 0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <box size="0.01 0.1 0.06"/>
+            </geometry>
+            <origin xyz="0.32 0 0.1 " rpy="0 0 0"/>
+        </collision>
+            <inertial> 
+            <mass value="0.125"/>
+            <inertia ixx="0.00014" ixy="0" ixz="0" iyy="3.85" iyz="0.0" izz="0.0001"/>
+        </inertial>
+    </link>
+
+    <joint name="right_stopper_to_center_beam" type="fixed">
+        <parent link="center_beam"/>
+        <child link="right_stopper"/>
+        <axis xyz="0 1 0"/>
+        <origin xyz="0.375 0 0.02"/>
+    </joint>
+
+    <joint name="left_stopper_to_center_beam" type="fixed">
+        <parent link="center_beam"/>
+        <child link="left_stopper"/>
+        <axis xyz="0 1 0"/>
+        <origin xyz="0 0 0.02"/>
+    </joint>
+
+
+
+    <joint name="rod_to_center_beam" type="continuous">
+        <parent link="left_rod"/>
+        <child link="center_beam"/>
+        <axis xyz="0 1 0"/>
+        <origin xyz="0 0 .15"/>
+        <limit effort="100" lower="-0.2" upper="0.2" velocity="100"/>
+    </joint>
+</robot>
