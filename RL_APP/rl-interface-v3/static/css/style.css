@@ -1,0 +1,308 @@
+/* Define root variables for colors */
+:root {
+    --primary-color: #3498db; /* Main theme color */
+    --secondary-color: orange; /* Secondary theme color */
+    --background-color: #ecf0f1; /* Background color */
+    --text-color: #34495e; /* Primary text color */
+    --accent-color: #e74c3c; /* Accent color for highlights */
+}
+
+/* Set global styles for the body */
+body {
+    font-family: 'Roboto', sans-serif; /* Font family for the body */
+    background-color: var(--background-color); /* Apply background color */
+    color: var(--text-color); /* Set text color */
+    margin: 0; /* Remove default margin */
+    padding: 0; /* Remove default padding */
+    line-height: 1.6; /* Line height for better readability */
+}
+
+/* Style for the main container */
+.container {
+    max-width: 1200px; /* Maximum width of the container */
+    margin: 0 auto; /* Center the container */
+    padding: 20px; /* Padding inside the container */
+    background-color: white; /* Background color */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a slight shadow */
+    border-radius: 10px; /* Rounded corners */
+}
+
+/* Styles for h1 and h2 headings */
+h1 {
+    text-align: center; /* Center the text */
+    color: var(--primary-color); /* Primary color for h1 */
+    margin-bottom: 30px; /* Space below the heading */
+    font-size: 2.8em; /* Font size */
+}
+
+h2 {
+    color: var(--secondary-color); /* Secondary color for h2 */
+}
+
+/* Styles for the options container */
+#options {
+    display: flex; /* Flexbox layout */
+    justify-content: center; /* Center the content */
+    margin-bottom: 30px; /* Space below the container */
+    margin-top: 30px; /* Space above the container */
+}
+
+/* Styles for the labels within the options container */
+#options label {
+    margin: 0 20px; /* Space between labels */
+    font-size: 23px; /* Font size */
+    display: flex; /* Flex layout */
+    align-items: center; /* Align items vertically */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Styles for the checkboxes within the options container */
+#options input[type="checkbox"] {
+    margin-right: 8px; /* Space between checkbox and label */
+    transform: scale(1.5); /* Scale the checkbox size */
+}
+
+/* Styles for the button container */
+.button-container {
+    display: flex; /* Flexbox layout */
+    justify-content: center; /* Center the content */
+    gap: 20px; /* Space between buttons */
+    margin-bottom: 30px; /* Space below the container */
+}
+
+/* Styles for the buttons */
+.btn {
+    display: inline-block; /* Inline block display */
+    padding: 12px 24px; /* Padding inside buttons */
+    font-size: 24px; /* Font size */
+    color: white; /* Text color */
+    background-color: var(--primary-color); /* Background color */
+    border: none; /* Remove border */
+    border-radius: 25px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    text-decoration: none; /* Remove underline */
+    transition: all 0.3s ease; /* Smooth transition effects */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow effect */
+}
+
+/* Styles for the buttons on hover */
+.btn:hover {
+    background-color: #2980b9; /* Darker background on hover */
+    transform: translateY(-2px); /* Slight upward movement on hover */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Enhanced shadow on hover */
+}
+
+/* Styles for the simulation controls container */
+#simulation-controls {
+    display: flex; /* Flexbox layout */
+    justify-content: center; /* Center the content */
+    gap: 15px; /* Space between controls */
+    margin-bottom: 30px; /* Space below the container */
+}
+
+/* Styles for the keyboard controls container */
+#keyboard-controls {
+    text-align: center; /* Center the text */
+    margin-bottom: 30px; /* Space below the container */
+    background-color: #f7f7f7; /* Light background color */
+    padding: 15px; /* Padding inside the container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Shadow effect */
+}
+
+/* Styles for the simulation container */
+#simulation-container {
+    display: flex; /* Flexbox layout */
+    justify-content: center; /* Center the content */
+    margin-bottom: 30px; /* Space below the container */
+}
+
+/* Styles for the image container */
+.image-container {
+    display: flex; /* Flexbox layout */
+    flex-wrap: wrap; /* Wrap images to the next line */
+    justify-content: center; /* Center the content */
+    gap: 30px; /* Space between images */
+}
+
+/* Styles for the image wrapper */
+.image-wrapper {
+    text-align: center; /* Center the text */
+    background-color: white; /* Background color */
+    padding: 20px; /* Padding inside the wrapper */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, .3); /* Shadow effect */
+    transition: all 0.3s ease; /* Smooth transition effects */
+    border-image: 0%; /* Reset border image */
+}
+
+/* Styles for the image wrapper on hover */
+.image-wrapper:hover {
+    transform: translateY(-5px); /* Slight upward movement on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Styles for the images */
+.image-wrapper img {
+    max-width: 100%; /* Responsive width */
+    height: auto; /* Maintain aspect ratio */
+    border: 2px solid var(--secondary-color); /* Border around the image */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Styles for the gif container */
+.gif-container {
+    display: flex; /* Flexbox layout */
+    flex-wrap: wrap; /* Wrap gifs to the next line */
+    justify-content: center; /* Center the content */
+    gap: 20px; /* Space between gifs */
+}
+
+/* Styles for the gif wrapper */
+.gif-wrapper {
+    text-align: center; /* Center the text */
+    background-color: white; /* Background color */
+    padding: 20px; /* Padding inside the wrapper */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 3px 9px rgba(0, 0, 0, .3); /* Shadow effect */
+    transition: all 0.3s ease; /* Smooth transition effects */
+    border-image: 0%; /* Reset border image */
+}
+
+/* Styles for the gif wrapper on hover */
+.gif-wrapper:hover {
+    transform: translateY(-5px); /* Slight upward movement on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+}
+
+/* Styles for the gifs */
+.gif-wrapper img {
+    max-width: 100%; /* Responsive width */
+    height: auto; /* Maintain aspect ratio */
+    border: 2px solid var(--secondary-color); /* Border around the gif */
+    border-radius: 5px; /* Rounded corners */
+}
+
+/* Styles for the graph container */
+#graph-container {
+    height: 50vh; /* Set height to 50% of the viewport height */
+    width: 95%; /* Set width to 95% */
+    position: relative; /* Relative positioning */
+}
+
+/* Styles for the total reward display */
+#total-reward-display {
+    font-size: 1.5vw; /* Font size relative to viewport width */
+}
+
+/* Flexbox layout for containers */
+.flex-container {
+    display: flex; /* Flexbox layout */
+    flex-direction: column; /* Column direction */
+    height: 100vh; /* Full viewport height */
+}
+
+/* Flex item styling */
+.flex-item {
+    flex: 1; /* Flexible sizing */
+    overflow: auto; /* Enable scrolling */
+}
+
+/* Responsive styles for larger screens */
+@media (min-width: 768px) {
+    .flex-container {
+        flex-direction: row; /* Row direction for larger screens */
+    }
+}
+
+/* Styles for the modal */
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Fixed positioning */
+    z-index: 1000; /* High z-index for overlay */
+    left: 0; /* Full width */
+    top: 0; /* Full height */
+    width: 100%; /* Cover the entire viewport */
+    height: 100%;
+    background-color: rgba(0,0,0,0.4); /* Semi-transparent background */
+}
+
+/* Styles for the modal content */
+.modal-content {
+    background-color: #fefefe; /* Light background color */
+    margin: 15% auto; /* Center the modal */
+    padding: 20px; /* Padding inside the modal */
+    border: 1px solid #888; /* Border around the modal */
+    width: 80%; /* Width of the modal */
+    max-width: 600px; /* Maximum width */
+}
+
+/* Styles for the start simulation button */
+#startSimulationBtn {
+    margin-top: 20px; /* Space above the button */
+}
+
+/* Styles for the close button */
+.close {
+    color: #aaa; /* Gray color */
+    float: right; /* Align to the right */
+    font-size: 28px; /* Large font size */
+    font-weight: bold; /* Bold font weight */
+    cursor: pointer; /* Pointer cursor */
+}
+
+/* Styles for the close button on hover and focus */
+.close:hover,
+.close:focus {
+    color: black; /* Change color on hover/focus */
+    text-decoration: none; /* Remove underline */
+    cursor: pointer; /* Pointer cursor */
+}
+
+/* Styles for the header */
+header {
+    text-align: center; /* Center the text */
+    margin-bottom: 20px; /* Space below the header */
+}
+
+/* Styles for the header image */
+header img {
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+}
+
+/* Styles for the slider */
+.slider {
+    -webkit-appearance: none; /* Remove default styling */
+    appearance: none; /* Remove default styling */
+    width: 250px; /* Width of the slider */
+    height: 15px; /* Height of the slider */
+    background: #d3d3d3; /* Background color */
+    outline: none; /* Remove outline */
+    opacity: 0.4; /* Lower opacity */
+    -webkit-transition: .2s; /* Smooth transition */
+    transition: opacity .2s; /* Smooth transition */
+}
+
+/* Styles for the slider on hover */
+.slider:hover {
+    opacity: 2; /* Increase opacity */
+}
+
+/* Styles for the slider thumb (handle) */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styling */
+    appearance: none; /* Remove default styling */
+    width: 25px; /* Width of the thumb */
+    height: 25px; /* Height of the thumb */
+    background: #3498db; /* Thumb color */
+    cursor: pointer; /* Pointer cursor */
+}
+
+/* Styles for the slider thumb (handle) for Mozilla */
+.slider::-moz-range-thumb {
+    width: 25px; /* Width of the thumb */
+    height: 25px; /* Height of the thumb */
+    background: #3788be; /* Thumb color */
+    cursor: pointer; /* Pointer cursor */
+}

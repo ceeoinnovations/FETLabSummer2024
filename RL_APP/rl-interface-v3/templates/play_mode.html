@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icons/playmode.png') }}">
+    <title>PyBullet Ball and Beam Simulation - Play Mode</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="{{ url_for('static', filename='js/play_mode.js') }}" defer></script>
+    <style>
+        /* CSS styles for the page layout and elements */
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding-bottom: 20px;
+            margin: 0;
+            background-color: #f9f9f9;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        .hero {
+            background-color: #fff;
+            padding: 40px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        #keyboard-controls p {
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+
+        .controls-container {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .buttons-container {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .sliders {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            max-width: 600px;
+        }
+
+        .slider-group {
+            width: 100%;
+        }
+
+        .slider {
+            width: 100%;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #3498db;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        #graph-container {
+            width: 100%;
+            height: 400px;
+            max-height: 50vh;
+            margin-bottom: 20px;
+        }
+
+        .help-btn {
+            position: fixed;
+            top: 20px;
+            right: 15px;
+            background-color: white;
+            color: #3498db;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fff;
+            margin: 10% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .hidden {
+            visibility: hidden;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        footer { margin-top: 40px; padding: 20px; background-color: #3498db; color: white; text-align: center; }
+        footer p { margin: 0; font-size: 1em; }
+        @media (max-width: 768px) {
+            .controls-container {
+                flex-direction: column;
+            }
+
+            h1 {
+                font-size: 2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Main content container -->
+    <div class="hero">
+        <!-- Title of the page -->
+        <h1>Ball and Beam Simulation</h1>
+        
+        <!-- Help button -->
+        <button class="help-btn" id="helpBtn" aria-label="Help"><i class="fas fa-question"></i></button>
+        
+        <!-- Keyboard controls description -->
+        <div id="keyboard-controls">
+            <p>You can manually control the ball and beam system. Use the right and left arrow keys to adjust the beam angle and keep the ball near the goal position (blue line). The graph tracks your performance, and the total reward shows your overall score. Aim for the highest score!</p>
+            <p>← Left Arrow: Decrease angle | Right Arrow: Increase angle →</p>
+        </div>
+        
+        <!-- Control and graph containers -->
+        <div class="controls-container">
+            <div id="graph-container">
+                <canvas id="rewardGraph"></canvas>
+            </div>
+            <div class="sliders">
+                <div class="slider-group">
+                    <label for="ball-position-slider">Set ball position:</label>
+                    <input type="range" id="ball-position-slider" min="0.554" max="0.88" step="0.01" value="0.88" class="slider">
+                    <span id="ball-position-value">0.88</span>
+                </div>
+                <div class="slider-group">
+                    <label for="blue-line-position-slider">Set goal state position:</label>
+                    <input type="range" id="blue-line-position-slider" min="0.554" max="0.88" step="0.01" value="0.7" class="slider">
+                    <span id="blue-line-position-value">0.7</span>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <button id="start-btn" class="btn">Start</button>
+                <button id="stop-btn" class="btn">Stop</button>
+                <button id="reset-btn" class="btn">Reset</button>
+            </div>
+        </div>
+    
+        <!-- Display for the total reward -->
+        <div id="total-reward-display" style="margin-top: 20px; font-size: 16px;"></div>
+    </div>
+
+    <!-- Help modal -->
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Understanding Play Mode</h2>
+            <p>Play Mode allows you to manually control the ball and beam system. This can help you understand how reinforcement learning (RL) algorithms interact with the environment. By controlling the system yourself, you can gain insights into how the RL agent learns to balance the ball.</p>
+            <p>In this mode, you can:</p>
+            <ul style="text-align: left;">
+                <li>Adjust the beam angle using the left and right arrow keys.</li>
+                <li>Observe how the ball reacts to changes in the beam angle.</li>
+                <li>Understand the dynamics of the reward system based on the ball's position relative to the goal (blue line).</li>
+                <li>Compare your manual control performance with that of the RL agent.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Instructions modal -->
+    <div id="instructionModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Instructions</h2>
+            <p>For the best experience, please follow these steps:</p>
+            <ol style="text-align: left;">
+                <li>Open the GUI from your taskbar and arrange it and the interface side by side.</li>
+                <li>Ensure both windows are visible.</li>
+                <li>Click the "Start Simulation" button when ready.</li>
+            </ol>
+            <button id="startSimulationBtn" class="btn hidden">Start Simulation</button>
+        </div>
+    </div>
+
+    <!-- Back to Home button -->
+    <div class="button-container" style="text-align: center;">
+        <a href="/" class="btn"><i class="fas fa-home"></i> Back to Home</a>
+    </div>
+
+    <!-- Footer section -->
+    <footer>
+        <p>&copy; 2024 TUFTS CEEO RL App. All rights reserved.</p>
+    </footer>
+
+    <!-- JavaScript code for the modal and button interactions -->
+    <script>
+        document.getElementById('helpBtn').addEventListener('click', function() {
+            document.getElementById('helpModal').style.display = 'block';
+        });
+
+        document.querySelectorAll('.close').forEach(button => {
+            button.addEventListener('click', function() {
+                document.getElementById('helpModal').style.display = 'none';
+                document.getElementById('instructionModal').style.display = 'none';
+            });
+        });
+
+        document.addEventListener('DOMContentLoaded', (event) => {
+            // Wait for 3 seconds before showing the button
+            setTimeout(() => {
+                document.getElementById('startSimulationBtn').classList.remove('hidden');
+            }, 4000);
+        });
+    </script>
+</body>
+</html>

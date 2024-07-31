@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic HTML setup and linking to external CSS file -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icons/index.png') }}">
+    <title>Reinforcement Learning with a Ball and Beam System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Styling for body and general elements */
+        body { font-family: 'Roboto', sans-serif; margin: 0; padding: 0; background-color: #f9f9f9; color: #333; text-align: center; }
+        header img { width: 100%; height: auto; }
+        main { padding: 20px; }
+        h1 { font-size: 2.5em; color: #3498db; margin-bottom: 10px; }
+        p { font-size: 1.2em; margin-bottom: 20px; }
+        
+        /* Hero section styling */
+        .hero { background-color: #fff; padding: 40px 20px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; margin-bottom: 40px; }
+        
+        /* Tabs and tab content styling */
+        .tabs { display: flex; flex-direction: column; align-items: center; }
+        .tab-buttons { display: flex; gap: 20px; margin-bottom: 30px; }
+        .tab-button { padding: 15px 30px; font-size: 18px; cursor: pointer; border: 2px solid #ccc; background-color: #fff; transition: all 0.3s ease; }
+        .tab-button.active, .tab-button:hover { border-color: #3498db; background-color: #f0f8ff; color: #3498db; }
+        .tab-content { display: none; max-width: 700px; text-align: center; border: 2px solid #ddd; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); }
+        .tab-content.active { display: block; }
+        .tab-content p { font-size: 20px; margin-top: 20px; }
+        
+        /* Button and footer styling */
+        .btn { display: inline-block; padding: 15px 30px; font-size: 18px; color: white; background-color: #3498db; border: none; border-radius: 2px; cursor: pointer; text-decoration: none; transition: all 0.3s ease; margin-bottom: 20px; }
+        .btn:hover { background-color: #2980b9; }
+        footer { margin-top: 40px; padding: 20px; background-color: #3498db; color: white; text-align: center; }
+        footer p { margin: 0; font-size: 1em; }
+    </style>
+</head>
+<body>
+    <!-- Header section with an image -->
+    <header>
+        <img src="{{ url_for('static', filename='images/header/header.png') }}" alt="Header Image">
+    </header>
+
+    <!-- Main content section -->
+    <main>
+        <!-- Hero section -->
+        <div class="hero">
+            <h1>Reinforcement Learning with a Ball and Beam System</h1>
+            <p>Welcome to our interactive learning platform! This simulation demonstrates how reinforcement learning can be applied to control a ball and beam system. The goal is to train an agent to balance a ball at a target position by adjusting the beam's angle. Use the tabs below to explore different modes and view training results.</p>
+        </div>
+
+        <!-- Tabs section -->
+        <div class="tabs">
+            <div class="tab-buttons">
+                <button class="tab-button active" onclick="showTabContent('manual-mode')">Manual Mode</button>
+                <button class="tab-button" onclick="showTabContent('new-training')">New Training</button>
+                <button class="tab-button" onclick="showTabContent('view-results')">View All Results</button>
+            </div>
+            <div id="manual-mode" class="tab-content active">
+                <a href="{{ url_for('play_mode') }}" class="btn">Manual Mode</a>
+                <p>Control the ball and beam system manually to understand the dynamics of the simulation.</p>
+            </div>
+            <div id="new-training" class="tab-content">
+                <a href="{{ url_for('new_training') }}" class="btn">New Training</a>
+                <p>Select different observation spaces and train the reinforcement learning model with new data.</p>
+            </div>
+            <div id="view-results" class="tab-content">
+                <a href="{{ url_for('view_all_results') }}" class="btn">View All Results</a>
+                <p>View the results of all your simulations and training sessions to analyze performance.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer section -->
+    <footer>
+        <p>&copy; 2024 TUFTS CEEO RL App. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript function to switch between tab contents
+        function showTabContent(tabId) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            const tabButtons = document.querySelectorAll('.tab-button');
+            tabContents.forEach(content => content.classList.remove('active'));
+            tabButtons.forEach(button => button.classList.remove('active'));
+            document.getElementById(tabId).classList.add('active');
+            document.querySelector(`.tab-button[onclick="showTabContent('${tabId}')"]`).classList.add('active');
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic HTML setup and linking to external CSS file -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/newtraining.png') }}">
+    <title>New Training</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            padding: 0;
+            margin: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            font-size: 2.5em;
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        p {
+            font-size: 1.2em;
+            margin-bottom: 40px;
+        }
+
+
+
+        #options label {
+            display: block;
+            margin-bottom: 20px;
+            font-size: 1.2em;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 15px 30px;
+            font-size: 18px;
+            color: white;
+            background-color: #3498db;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+        footer { margin-top: 40px; padding: 20px; background-color: #3498db; color: white; text-align: center; }
+        footer p { margin: 0; font-size: 1em; }
+        #calculating {
+            display: none;
+            font-size: 1.5em;
+            color: #3498db;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Page title and description -->
+        <h1>New Training Simulation</h1>        
+        <p><b>Observation spaces</b> in reinforcement learning define the information that an agent receives about its environment.
+        In the ball and beam system where we want our system to learn to balance the ball at the center of the beam, we can change the parameters that the agent knows about its environment such as
+        the position of the ball, the velocity of the ball and the angle of the beam.</p>
+        
+        <p>All of these parameters can help the agent make informed decisions.
+        Choose combinations of these three parameters to determine the best observation space that can help to maximize the reward.</p>
+        
+        <p>Reward System: +10 for being within setpoint. In the examples, the setpoint is the center of the beam</p>
+
+        <!-- Form for starting a new training -->
+        <form id="training-form">
+            <!-- Checkboxes for selecting observations -->
+            <div id="options">
+                <label><input type="checkbox" name="observation" value="position"> Position</label>
+                <label><input type="checkbox" name="observation" value="velocity"> Velocity</label>
+                <label><input type="checkbox" name="observation" value="angle"> Angle</label>
+            </div>
+
+            <!-- Submit button -->
+            <div class="button-container">
+                <button type="submit" class="btn" style="background-color: #FF0000;">Train</button>
+            </div>
+
+            <div class="button-container" style="text-align: center;">
+                <a href="/" class="btn"><i class="fas fa-home"></i> Back to Home</a>
+            </div>
+            
+        </form>
+
+        <!-- Placeholder for calculating message -->
+        <div id="calculating">
+            <p>Training...</p>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 TUFTS CEEO RL App. All rights reserved.</p>
+    </footer>
+    <!-- JavaScript for handling form submission -->
+    <script>
+        document.getElementById('training-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            var form = this;
+            var formData = new FormData(form);
+
+            // Check if at least one checkbox is checked
+            var checkboxes = document.querySelectorAll('input[name="observation"]');
+            var isChecked = Array.from(checkboxes).some(checkbox => checkbox.checked);
+
+            if (!isChecked) {
+                alert('Please select at least one observation option.');
+                return;
+            }
+
+            // Show the calculating message and hide the form
+            document.getElementById('calculating').style.display = 'block';
+            form.style.display = 'none';
+
+            fetch('{{ url_for("run_training") }}', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                // Hide the calculating message
+                document.getElementById('calculating').style.display = 'none';
+
+                let url = new URL('{{ url_for("training_result") }}', window.location.origin);
+                data.observations.forEach(obs => url.searchParams.append('observation', obs));
+                window.location.href = url.toString();
+            });
+        });
+    </script>
+</body>
+</html>

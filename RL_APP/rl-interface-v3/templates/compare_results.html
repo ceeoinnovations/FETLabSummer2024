@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata and external resource links -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icons/allresultsicon.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>Compare Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* Basic styling for the page */
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: whitesmoke;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 40px;
+            background-color: #ffffff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #3498db;            ;
+            margin-bottom: 40px;
+        }
+
+        .comparison-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 30px;
+        }
+
+        .comparison-item {
+            flex: 0 1 calc(50% - 15px);
+            max-width: 500px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .comparison-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .comparison-item h3 {
+            color: #34495e;
+            margin-bottom: 15px;
+        }
+
+        
+        .comparison-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .caption {
+            font-style: italic;
+            color: #7f8c8d;
+            margin-top: 10px;
+        }
+
+        .button-container {
+            text-align: center;
+            margin-top: 40px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 24px;
+            background-color: #3498db;
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #2980b9;
+        }
+
+        footer { margin-top: 40px; padding: 20px; background-color: #3498db; color: white; text-align: center; }
+        footer p { margin: 0; font-size: 1em; }
+    </style>
+</head>
+<body>
+    <!-- Main container for the content -->
+    <div class="container">
+        <h1>Compare Results</h1>
+        <div class="comparison-container">
+            {% for item in comparison_data %}
+                <div class="comparison-item">
+                    <h3>Result {{ loop.index }}: Observations - {{ item.observations|join(', ') }}</h3>
+                    <!-- Display different types of data based on the item type -->
+                    {% if item.type == 'graph' %}
+                        <img src="{{ url_for('static', filename='obs_space/graphs/{}/{}'.format(item.obs_space_folder, item.filename)) }}" alt="Graph">
+                        <p class="caption">Training Reward Graph</p>
+                    {% elif item.type == 'gif' %}
+                        <img src="{{ url_for('static', filename='obs_space/gifs/{}/{}'.format(item.obs_space_folder, item.filename)) }}" alt="GIF">
+                        <p class="caption">
+                            {% if '1000' in item.filename %}
+                                1000 Episodes
+                            {% elif '3000' in item.filename %}
+                                3000 Episodes
+                            {% elif '5000' in item.filename %}
+                                5000 Episodes
+                            {% else %}
+                                Learning Progression
+                            {% endif %}
+                        </p>
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+        <div class="button-container">
+            <a href="{{ url_for('view_all_results') }}" class="btn">Back to All Results</a>
+        </div>
+    </div>
+    
+
+    <footer>
+        <p>&copy; 2024 TUFTS CEEO RL App. All rights reserved.</p>
+    </footer>
+</body>
+</html>

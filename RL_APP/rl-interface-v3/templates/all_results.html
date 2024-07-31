@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Metadata and page setup -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='images/icons/allresultsicon.png') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <title>All Results</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!-- Inline styling for the page -->
+    <style>
+        footer { margin-top: 40px; padding: 20px; background-color: #3498db; color: white; text-align: center; }
+        footer p { margin: 0; font-size: 1em; }
+        body { font-family: 'Roboto', sans-serif; background-color: #f9f9f9; margin: 0; padding: 0; overflow-x: hidden; }
+        .container { max-width: 1200px; margin: 40px auto; padding: 40px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 10px; background-color: #fff; }
+        h1 { font-size: 2.5em; color: #3498db; margin-bottom: 20px; text-align: center; }
+        p { font-size: 1.2em; margin-bottom: 20px; text-align: center; }
+
+        .result-item { margin-bottom: 50px; border: 1px solid #ccc; padding: 20px; border-radius: 8px; background-color: #f9f9f9; }
+        .image-container { display: flex; justify-content: center; margin-top: 20px; }
+        .image-wrapper, .gif-wrapper { text-align: center; width: 100%; max-width: 800px; }
+        .gif-container { display: flex; justify-content: space-between; gap: 20px; margin-top: 30px; }
+        .gif-wrapper { flex: 1; }
+        .image-wrapper img, .gif-wrapper img { max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+        .button-container { margin-top: 50px; display: flex; justify-content: center; }
+        .btn, .btn2 { padding: 15px 30px; font-size: 18px; color: white; border: none; cursor: pointer; text-decoration: none; transition: all 0.3s ease; }
+        .btn { background-color: #3498db; border-radius: 25px; }
+        .btn2 { background-color: red; border-radius: 2px; }
+        .btn:hover, .btn2:hover { background-color: #2980b9; }
+        h2, h3, figcaption { text-align: center; }
+        h2 { margin-top: 30px; margin-bottom: 15px; color: #555; }
+        h3 { margin-top: 25px; margin-bottom: 10px; color: #666; }
+        figcaption { margin-top: 10px; font-style: italic; color: #777; }
+        .help-btn { position: fixed; top: 20px; right: 15px; background-color: white; color: #3498db; border: none; border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); z-index: 1000; }
+        .modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0,0,0,0.4); }
+        .modal-content { background-color: white; margin: 10% auto; padding: 20px; border: 1px solid #888; width: 80%; max-width: 500px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); text-align: center; }
+        .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; }
+        .close:hover, .close:focus { color: black; text-decoration: none; cursor: pointer; }
+
+        .no-results-message {
+            color: black; /* Set text color to black */
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>All Results</h1>
+    
+    {% if message %}
+        <p>{{ message }}</p>
+    {% else %}
+        {% if results %}
+            <p>Total results: {{ results|length }}</p>
+            {% for result in results %}
+                <div class="result-item" data-result-id="{{ loop.index0 }}">
+                    <h2>Result {{ loop.index }}: Observations - {{ result.observations|join(', ') }}</h2>
+                    
+                    <!-- Graph display section -->
+                    <div class="image-container">
+                        <figure class="image-wrapper">
+                            <div class="checkbox-wrapper">
+                                <input type="checkbox" id="graph-{{ loop.index0 }}" data-type="graph" data-filename="train_reward.png">
+                                <label for="graph-{{ loop.index0 }}">Select for comparison</label>
+                            </div>
+                            <img src="{{ url_for('static', filename='obs_space/graphs/{}/train_reward.png'.format(result.obs_space_folder)) }}" alt="{{ result.observations|join(' ') }} Graph">
+                            <figcaption>Training Reward Graph for {{ result.observations|join(' ') }}</figcaption>
+                        </figure>
+                    </div>
+
+                    <!-- GIFs showing learning progression -->
+                    <h3>Learning Progression</h3>
+                    <div class="gif-container">
+                        {% for episode in [1000, 3000, 5000] %}
+                            <div class="gif-wrapper">
+                                <div class="checkbox-wrapper">
+                                    <input type="checkbox" id="gif-{{ loop.index0 }}-{{ episode }}" data-type="gif" data-filename="model_checkpoint_{{ episode }}.gif">
+                                    <label for="gif-{{ loop.index0 }}-{{ episode }}">Select for comparison</label>
+                                </div>
+                                <img src="{{ url_for('static', filename='obs_space/gifs/{}/model_checkpoint_{}.gif'.format(result.obs_space_folder, episode)) }}" alt="{{ episode }} Episodes">
+                                <figcaption>{{ episode }} Episodes</figcaption>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+            <!-- Button to compare selected items -->
+            <div class="button-container">
+                <button id="compare-btn" class="btn2">Compare Selected</button>
+            </div>
+        {% else %}
+            <p class="no-results-message">No results available yet. This is where results will be displayed after you've run a new training.</p>
+        {% endif %}
+    {% endif %}
+    
+    <!-- Navigation button -->
+    <div class="button-container" style="text-align: center;">
+        <a href="/" class="btn"><i class="fas fa-home"></i> Back to Home</a>
+    </div>
+</div>
+
+    <!-- Help button and modal -->
+    <button class="help-btn" id="helpBtn" aria-label="Help"><i class="fas fa-question"></i></button>
+
+    <div id="helpModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Instructions</h2>
+            <ol>
+                <li>Select the checkboxes next to the graphs and GIFs you want to compare.</li>
+                <li>Click the "Compare Selected" button to view the selected items side by side.</li>
+                <li>You can select multiple items across different observation spaces for comparison.</li>
+            </ol>
+        </div>
+    </div>
+    <footer>
+        <p>&copy; 2024 TUFTS CEEO RL App. All rights reserved.</p>
+    </footer>
+    <!-- JavaScript for modal and comparison handling -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const compareButton = document.getElementById('compare-btn');
+            const helpButton = document.getElementById('helpBtn');
+            const closeButton = document.querySelector('.close');
+            const helpModal = document.getElementById('helpModal');
+
+            compareButton.addEventListener('click', compareResults);
+
+            helpButton.addEventListener('click', function() {
+                helpModal.style.display = 'block';
+            });
+
+            closeButton.addEventListener('click', function() {
+                helpModal.style.display = 'none';
+            });
+
+            window.onclick = function(event) {
+                if (event.target == helpModal) {
+                    helpModal.style.display = 'none';
+                }
+            };
+        });
+
+        function compareResults() {
+            const selectedItems = [];
+            document.querySelectorAll('input[type="checkbox"]:checked').forEach(checkbox => {
+                const resultItem = checkbox.closest('.result-item');
+                selectedItems.push({
+                    resultId: resultItem.dataset.resultId,
+                    type: checkbox.dataset.type,
+                    filename: checkbox.dataset.filename
+                });
+            });
+
+            if (selectedItems.length < 2) {
+                alert('Please select at least two items to compare.');
+                return;
+            }
+
+            const queryString = selectedItems.map((item, index) => 
+                `item${index}=${encodeURIComponent(JSON.stringify(item))}`
+            ).join('&');
+
+            window.location.href = `/compare_results?${queryString}`;
+        }
+    </script>
+</body>
+</html>
