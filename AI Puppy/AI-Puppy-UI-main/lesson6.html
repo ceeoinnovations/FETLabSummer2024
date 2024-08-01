@@ -1,0 +1,197 @@
+<!--
+  lesson6.html
+  
+  Authors: Javier Laveaga, William Goldman, Izzy Morales
+  Date: July 31, 2024
+  Version: 1.0
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lessons Placemat</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@pyscript/core@0.4.46/dist/core.js"></script>
+    <script src="script.js"></script>
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!--For save button-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  <!--For download exception icon-->
+</head>
+<body id="lesson6">
+    <header>
+        <nav class="headbar">
+            <a href="index.html" id="lesson1-link" >Lesson 1</a>
+            <a href="lesson2.html" id="lesson2-link">Lesson 2</a>
+            <a href="lesson3.html" id="lesson3-link">Lesson 3</a>
+            <a href="lesson4.html" id="lesson4-link">Lesson 4</a>
+            <a href="lesson5.html" id="lesson5-link">Lesson 5</a>
+            <a href="lesson6.html" id = "lesson6-link" class="active">Lesson 6</a> <!-- hello !-->
+        </nav>
+    </header>
+    <div class="container">
+        <div class="section title-section">
+            <h1>AI Puppy Lesson 6: Puppy Disco</h1>
+            <p style="font-size:20px">Code your puppy to do dance moves! Use reinforcement learning to train it to perform a dance sequence!</p>
+        </div>
+        
+        <div class="two-boxes-container">
+            <div class="yellow-box">
+                <h2>Machine Learning Type</h2>
+                <p style="font-size:18px">
+                    <a href="https://www.geeksforgeeks.org/what-is-reinforcement-learning/" class="special-link">Reinforcement Learning</a>:
+                    <a href="https://www.geeksforgeeks.org/q-learning-in-python/" class="special-link">Q-learning</a>
+                </p>
+            </div>
+            <div class="yellow-box">
+                <h2>Tools Used</h2>
+                <p style="font-size:18px">Color sensor, force sensor, motors, & starter code</p>
+            </div>
+        </div>
+
+        <div class="section go-sections">
+            <h2>Example Ideas</h2>
+            <p>Build a puppy that can be petted!</p>
+            <img class="puppyPicture" src="nobgimages/aipuppy4_360-removebg-preview.png" alt="Puppy 4">
+            <img class="puppyPicture" src="nobgimages/aipuppy5_480-removebg-preview.png" alt="Puppy 5">
+            <img class="puppyPicture" src="nobgimages/aipuppy2_360-removebg-preview.png" alt="Puppy 2">
+        </div>
+
+        <div class="section go-sections">
+            <h2>Tips & Troubleshooting</h2>
+            <div class="container3">
+                <p class="basic"><span style="font-weight: bold">READ</span> through the code before you start coding! Make sure your puppy can easily turn!<p>
+                <p class="basic">Code your puppy to go forwards, backwards, left, and right. <span style="font-weight: bold">Code “dance moves” in with those actions too!</span><p>
+                <p class="basic">Be patient! It may take time to get your puppy to do exactly what you want!<p>
+                <p class="basic">Test out your code in the puppy_move function before running the code for the entire lesson.<p>
+                <br>
+                <p class="title"><span style="font-weight: bold">TRAINING YOUR PUPPY:</span><p>
+                <p class="basic">Press the <span style="font-weight: bold">left button</span> if your puppy leaves the dance floor. This is a very bad reward. Your puppy will have to start the sequence over.<p>
+                <p class="basic">Press the <span style="font-weight: bold">right button</span> if your puppy does the wrong move, but stays on the dance floor. This is not a great reward.<p>
+                <p class="basic">Press the <span style="font-weight: bold">force sensor for less than a secon</span> if your puppy does the right move! This is a good reward!<p>  
+                <p class="basic">Press the <span style="font-weight: bold">force sensor for a few seconds</span> if your puppy does the right dance move to get to the ending square! This is a great reward!<p>
+            </div>
+        </div>
+
+      
+        <div class="container2">
+            <div class="header">
+                <script type="mpy" src="./main.py" config="./pyscript.toml"></script>
+                <div class="topDisplay">
+                    <button class="button1" id="connect-spike">Connect</button>
+                     <!--FOR RUN BUTTON-->
+                    <!-- partial:index.partial.html -->
+                    <div class="button-row">
+                        <button class="button | button--toggle button--play" id="custom-run-button" data-editor-id="MPcode"> 
+                            <i class="ph-play | gg-play-button"></i>
+                            <i class="ph-pause | gg-play-stop"></i>
+                        </button>
+                    </div>
+                    <!--button class="button1" id="custom-run-button" data-editor-id="MPcode">Run</button-->
+                    <!--button class="button1" id="custom-run-button" >Run</button-->
+                    <!--button class="button1" id="save_button" >Save</button-->
+                    <button id="save_button" class="button1">
+                        <i class="fa fa-save" ></i>
+                    </button>
+                    <div class="status-container">
+                        <div id="sensor-info" class="sensor-info-container"></div>
+                        <div class="progress-container" id="progressDiv">
+                            <progress id="progress" value="0" max="100"></progress> 
+                            <span class="progress-text" id="progress-percent">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="overlay" class="overlay">
+                <div class="modal">
+                    <p>
+                        Do you want to save on SPIKE? <br> 
+                        <span class="subtitle"> (gives option to save locally first) </span>
+    
+                    </p>
+                    <button id= "Yes-btn" class="btn-yes" >Yes</button>
+                    <button id = "No-btn" class="btn-no" >No</button>
+                </div>
+            </div>
+
+            <div class="flexBox">
+
+                <br>
+                <div class="box left-box">
+                    
+                    <textarea id='gitpath' > https://raw.githubusercontent.com/iliketocode2/AI-Puppy-UI/main/Lessons/Main_Lesson6.py https://raw.githubusercontent.com/iliketocode2/AI-Puppy-UI/main/Lessons/CEEO_AI.py</textarea>
+                    <!--<label for="files">Choose a file:</label> -->
+                    <div class="filesDiv">
+                        <select name="files" id="files" class="files">
+                        </select>
+                    </div>
+                    <div class="gifFrame"><img id="gif"></div> 
+                    <div class="horizontal-buttons">
+                        
+                        <input type="file" id="fileRead" style="display: none;"> <!--Hide actual file selector. FileRead id important for JS function-->
+                        <button class="button1" type="button" id="chooseFileButton">
+                            <i class="fa fa-upload"></i>
+                        </button>
+                        
+                        <!--button class="button1" id="download-code">Download Code</button-->
+                        <button id="download-code" class="button1">
+                         
+                            <i class="fa fa-download"></i>
+                        </button>
+                        
+                        <button class="button1" id="sensor_readings">Sensors</button>
+                    </div>
+                    <div class="portInstructions" id="portInfo">
+                        <h3>Port Assignments</h3>
+                        <div class="wrap">
+                            <p>Choose your own!</p>
+                        </div>
+                    </div>   
+
+                </div>
+                <div class="right-container">
+                    <div class="box right-box" id="hide_on_1_and_2">
+                        <div class ="terminalFrame" id="terminalFrameId">Pyscript Editor
+                            <script id="MPcode" type="mpy-editor" env="ble" class="mpy-editor-container"></script>
+                        </div>
+                    </div>
+                    <div class="slider">...</div>
+                    <div class="box right-box" id="resizeBox">
+                        <div class="tab">
+                            <button class="tablinks active" id="customTerminalButton" style="color: black;">Terminal</button>
+                            <button class="tablinks" id="defaultTerminalButton" style="color: black;">Debug</button>
+                        </div>
+                        <div id="debug" class="tabcontent">
+                            <div id="repl"></div>
+                        </div>
+                        <div id="terminal" class="tabcontent">
+                            <div id="terminalMessages">
+                                <div id="customTerminalMessage">Please connect to a SPIKE™ Prime to begin programming.<br><br></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- terminal to be removed from visual completely later (however, toggle available for real terminal and custom)
+        and replaced by custom terminal: instructions will pop up based on this-->
+
+        <div class="section go-sections">
+            <h2>Extended Thinking</h2>
+            <p>What happens if you only give your puppy the worst award (left button) when it does the wrong move? Does it learn the dance sequence faster?</p>
+            <img src="nobgimages/th-removebg-preview (1).png" alt="Your brain if you think about this" width="100px" height="auto">
+        </div>
+
+        <footer>
+            <p style="text-align: center;">
+                <img style="height:50px;width:auto;"src="images/tags2.png" alt="intermediate ai animals">
+            </p>
+            <p>----------------------------------------------------------------------- &copy;2024. All rights reserved.Tufts.edu.com -----------------------------------------------------------------------</p>
+        </footer>
+    </div>
+</body>
+</html>
+

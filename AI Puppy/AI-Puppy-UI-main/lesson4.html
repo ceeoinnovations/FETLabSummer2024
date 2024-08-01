@@ -1,0 +1,197 @@
+<!--
+  lesson4.html
+  
+  Authors: Javier Laveaga, William Goldman, Izzy Morales
+  Date: July 31, 2024
+  Version: 1.0
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Lessons Placemat</title>
+    <link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css">
+    <script type="module" src="https://cdn.jsdelivr.net/npm/@pyscript/core@0.4.46/dist/core.js"></script>
+    <script src="script.js"></script>
+    <link rel="icon" type="image/png" href="images/favicon-32x32.png">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!--For save button-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">  <!--For download exception icon-->
+
+</head>
+<body id = "lesson4">
+    <header>
+        <nav class="headbar">
+            <a href="index.html" id="lesson1-link" >Lesson 1</a>
+            <a href="lesson2.html" id="lesson2-link">Lesson 2</a>
+            <a href="lesson3.html" id="lesson3-link">Lesson 3</a>
+            <a href="lesson4.html" id="lesson4-link" class="active">Lesson 4</a>
+            <a href="lesson5.html" id="lesson5-link">Lesson 5</a>
+            <a href="lesson6.html" id="lesson6-link">Lesson 6</a>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="section title-section">
+            <h1>AI Puppy Lesson 4: Picky Puppy</h1>
+            <p style="font-size:20px">Code your puppy to react to at least 2 different colored objects presented to it!</p>
+        </div>
+        
+        <div class="two-boxes-container">
+            <div class="yellow-box">
+                <h2>Machine Learning Type</h2>
+                <p style="font-size:18px">
+                    <a href="https://www.geeksforgeeks.org/k-nearest-neighbours/" class="special-link">3D K-Nearest Neighbor</a>
+               </p>
+            </div>
+            <div class="yellow-box">
+                <h2>Tools Used</h2>
+                <p style="font-size:18px">Color sensor, motors, & starter code</p>
+            </div>
+        </div>
+
+        <div class="section go-sections">
+            <h2>Example Ideas</h2>
+            <p>Build a puppy that can be petted!</p>
+            <img class="puppyPicture" src="nobgimages/aipuppy4_360-removebg-preview.png" alt="Puppy 4">
+            <img class="puppyPicture" src="nobgimages/aipuppy5_480-removebg-preview.png" alt="Puppy 5">
+            <img class="puppyPicture" src="nobgimages/aipuppy2_360-removebg-preview.png" alt="Puppy 2">
+        </div>
+
+        <div class="section go-sections">
+            <h2>Tips & Troubleshooting</h2>
+            <div class="container3">
+                <div class="threeCol">
+                    <div class="column">
+                        <p class="title">Make sure the colors your puppy is detecting are clearly in front of the color sensor!</p>
+                    </div>
+                    <div class="column">
+                        <p class="title">Make sure to use the <span style="font-weight: bold">ai.KNN_3D</span> function instead of ai.KNN_1D! Color RGB values are 3D!</p>
+                    </div>
+                    <div class="column">
+                        <p class="title">Look back at the Lesson 3 code for hints on how to code “play mode” with the CEEO AI functions!</p>
+                    </div>
+                </div>
+                <p class="title">For loops can help you give your puppy more data points!</p>
+                <p class="title" style="font-weight: bold;">Don’t forget to save your code if you leave the page!</p>
+            </div>
+        </div>
+
+        <div class="container2">
+            <div class="header">
+                <script type="mpy" src="./main.py" config="./pyscript.toml"></script>
+                <div class="topDisplay">
+                    <button class="button1" id="connect-spike">Connect</button>
+                     <!--FOR RUN BUTTON-->
+                    <!-- partial:index.partial.html -->
+                    <div class="button-row">
+                        <button class="button | button--toggle button--play" id="custom-run-button" data-editor-id="MPcode"> 
+                            <i class="ph-play | gg-play-button"></i>
+                            <i class="ph-pause | gg-play-stop"></i>
+                        </button>
+                    </div>
+                    <!--button class="button1" id="custom-run-button" data-editor-id="MPcode">Run</button-->
+                    <!--button class="button1" id="custom-run-button" >Run</button-->
+                    <!--button class="button1" id="save_button" >Save</button-->
+                    <button id="save_button" class="button1">
+                        <i class="fa fa-save" ></i>
+                    </button>
+                    <div class="status-container">
+                        <div id="sensor-info" class="sensor-info-container"></div>
+                        <div class="progress-container" id="progressDiv">
+                            <progress id="progress" value="0" max="100"></progress> 
+                            <span class="progress-text" id="progress-percent">0%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="overlay" class="overlay">
+                <div class="modal">
+                    <p>
+                        Do you want to save on SPIKE? <br> 
+                        <span class="subtitle"> (gives option to save locally first) </span>
+    
+                    </p>
+                    <button id= "Yes-btn" class="btn-yes" >Yes</button>
+                    <button id = "No-btn" class="btn-no" >No</button>
+                </div>
+            </div>
+
+            <div class="flexBox">
+
+                <br>
+                <div class="box left-box">
+                    
+                    <textarea id='gitpath' >https://raw.githubusercontent.com/iliketocode2/AI-Puppy-UI/main/Lessons/Main_Lesson4.py https://raw.githubusercontent.com/iliketocode2/AI-Puppy-UI/main/Lessons/Main_Lesson4_demo.py https://raw.githubusercontent.com/iliketocode2/AI-Puppy-UI/main/Lessons/CEEO_AI.py </textarea>
+                    <!--<label for="files">Choose a file:</label> -->
+                    <div class="filesDiv">
+                        <select name="files" id="files" class="files">
+                        </select>
+                    </div>
+                    <div class="gifFrame"><img id="gif"></div>    
+                    <div class="horizontal-buttons">
+                        
+                        <input type="file" id="fileRead" style="display: none;"> <!--Hide actual file selector. FileRead id important for JS function-->
+                        <button class="button1" type="button" id="chooseFileButton">
+                            <i class="fa fa-upload"></i>
+                        </button>
+                        
+                        <!--button class="button1" id="download-code">Download Code</button-->
+                        <button id="download-code" class="button1">
+                         
+                            <i class="fa fa-download"></i>
+                        </button>
+                        
+                        <button class="button1" id="sensor_readings">Sensors</button>
+                    </div>
+
+                    <div class="portInstructions" id="portInfo">
+                        <h3>Port Assignments</h3>
+                        <div class="wrap">
+                            <p>Choose your own!</p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="right-container">
+                    <div class="box right-box" id="hide_on_1_and_2">
+                        <div class ="terminalFrame" id="terminalFrameId">Pyscript Editor
+                            <script id="MPcode" type="mpy-editor" env="ble" class="mpy-editor-container"></script>
+                        </div>
+                    </div>
+                    <div class="slider">...</div>
+                    <div class="box right-box" id="resizeBox">
+                        <div class="tab">
+                            <button class="tablinks active" id="customTerminalButton" style="color: black;">Terminal</button>
+                            <button class="tablinks" id="defaultTerminalButton" style="color: black;">Debug</button>
+                        </div>
+                        <div id="debug" class="tabcontent">
+                            <div id="repl"></div>
+                        </div>
+                        <div id="terminal" class="tabcontent">
+                            <div id="terminalMessages">
+                                <div id="customTerminalMessage">Please connect to a SPIKE™ Prime to begin programming.<br><br></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="section go-sections">
+            <h2>Extended Thinking</h2>
+            <p>How many foods can you get your puppy to have different reactions to? Does your puppy confuse foods? Think about why your puppy might be getting confused.</p>
+            <img src="nobgimages/th-removebg-preview (1).png" alt="Your brain if you think about this" width="100px" height="auto">
+        </div>
+
+        <footer>
+            <p style="text-align: center;">
+                <img style="height:50px;width:auto;"src="images/tags2.png" alt="intermediate ai animals">
+            </p>
+            <p>----------------------------------------------------------------------- &copy;2024. All rights reserved.Tufts.edu.com -----------------------------------------------------------------------</p>
+        </footer>
+    </div>
+</body>
+</html>
+

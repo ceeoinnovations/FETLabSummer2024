@@ -1,0 +1,1193 @@
+/* General Styles */
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+.section {
+    border: 3px solid #000; /* Changed border ? color and thickness */
+    padding: 10px;
+    margin: 10px;
+    width: 80%;
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+.title-section {
+    text-align: center;
+    border: 7px solid #66ccff; /* Blue border color and thickness */
+    border-radius: 10px;
+    background-color: #f9f9f9;
+}
+.tips {
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 3px solid #f9ee46; /* Yellow border color and thickness */
+}
+.go-sections {
+    background-color: #f9f9f9;
+    text-align: center;
+    border: 7px solid #ff5eae; /* Pink border color and thickness */
+    border-radius: 10px;
+}
+.no-center {
+    text-align: left;
+}
+.dropdown-container {
+    display: flex;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+.dropdown-container p {
+    margin: 0 10px;
+}
+.two-boxes-container {
+    width: 80%; /* Full width to match the parent container */
+    display: flex;
+    justify-content: space-between;
+    margin: 10px; /* Same margin as the sections for alignment */
+    box-sizing: border-box; /* Include padding and border in element's total width and height */
+}
+.yellow-box {
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 7px solid #f9ee46;
+    border-radius: 10px;
+    padding: 10px;
+    width: 48%; /* Slightly less than 50% to fit within the parent container */
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+.header {
+    width: 100%;
+}
+
+/*nav bar tabs css*/
+
+.headbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #4CAF50; /* Dark green */
+    border-radius: 5px;
+    padding: 10px 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.headbar a {
+    color: white;
+    text-align: center;
+    padding: 14px 20px;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 300;
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
+    border-radius: 25px;
+}
+
+.headbar a:hover {
+    background-color: #45a049; /* Lighter green */
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.headbar a.active {
+    background-color: #66bb6a; /* Even lighter green */
+    color: white;
+    font-weight: 700;
+    /* text-decoration: underline; */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* shadow for active tab */
+}
+
+.headbar a.active:hover {
+    transform: none;
+}
+
+/*---------------------------Tips and Troubleshooting LESSON 3---------------------------------*/
+
+.container3 {
+    padding: 20px;
+}
+
+.column {
+    padding: 10px;
+}
+
+.threeCol{
+    display: grid;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.title {
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.basic {
+    font-size: 18px;
+    margin-top: -10px;
+}
+
+.code-block {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin: 0;
+    white-space: pre-wrap;
+    text-align: left;
+}
+
+.red-text {
+    color: rgb(235, 60, 60);
+}
+
+.green-text {
+    color: green;
+}
+
+.blue-text{
+    color: rgb(0, 119, 255);
+}
+
+.gray-text{
+    color: gray;
+}
+
+/*-----------------------------------------------------------------------------*/
+
+main {
+    padding: 20px;
+    text-align: center;
+}
+
+/* a {
+    color: #4CAF50;
+    text-decoration: none;
+    font-size: 18px;
+    margin-top: 20px;
+    display: inline-block;
+} */
+
+a:hover {
+    color: #66bb6a;
+}
+
+img.puppyPicture {
+    height: 15vw;
+    width: auto;
+    padding: 5px;
+  }
+.img.gifthing {
+    height: 250px;
+    width: 800px;
+    padding: 5px 0;
+}
+.terminalFrame{
+    width: 100%;
+    height: 100%;
+    overflow-y: hidden;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    /* padding: 20px; */
+    margin: 20px;
+}
+
+.text-box {
+    flex: 1;
+    max-width: 200px;
+    font-size: 16px;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    flex: 2;
+    height: 200px;
+    width: auto;
+}
+
+.image-container img {
+    max-width: 45%;
+    height: auto;
+    margin: 0 5px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+
+
+/*hide green button from default pyscript editor*/
+.mpy-editor-run-button {
+    display: none !important;
+}
+
+/*Style for the green editor (below) */
+.mpy-editor-container {
+    width: 100%;
+    max-width: 600px;
+    height: 400px;
+    margin: 20px auto;
+    padding: 10px;
+    border: 3px solid #ff5eae; 
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+#sensor_readings {
+    display: none;
+}
+
+#gitpath {
+    display: none; /* Hide the textarea */
+}
+
+/* Code for Sensor values display  (Below)*/
+/* Styling for the sensor info container */
+.sensor-info-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    gap: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+    flex-grow: 1; /* Allow the container to grow */
+}
+
+.sensor-info {
+    flex: 0 0 auto;
+    min-width: 100px; /* Adjust this value based on your desired width */
+    max-width: calc(25% - 10px); /* This allows 2 items per row on most screens */
+    margin-right: 15px;
+    margin-left: 5px;
+}
+.sensor-info-item {
+    display: flex;
+    align-items: center;
+    background-color: #f0f0f0;
+    border-radius: 30px;
+    padding: 5px 7px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    width: 100%;
+    margin-top: 6px;
+}
+
+/*-------------------------------------------------------------*/
+
+.sensor-stack-left {
+    display: flex;
+    align-items: center;
+    margin-right: 10px;
+}
+
+.sensor-stack-right {
+    display: flex;
+    align-items: center;
+}
+
+.sensor-info-item span {
+    display: flex;
+    align-items: center;
+}
+
+.sensor-info-item img {
+    width: auto;
+    height: 24px;
+    margin-right: 5px;
+}
+
+.port-name {
+    font-weight: 800;
+    font-size: 18px;
+    color: #333;
+}
+
+.sensor-value {
+    color: #4295f5;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+/*cicle for color sensor display*/
+.colorCircle{
+    height: 10px;
+    width: 10px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+
+/*https://raw.githubusercontent.com/javier-la200426/CEEO/main/AI-Puppy/CEEO_AI.py*/
+
+/*main editor setup: large left box, two vertically stacked boxes on the right*/
+/*----------------------------------------------------*/
+.container2 {
+    width: 80%;
+    height: 85vh;
+    border-radius: 10px;
+    /* border: 7px solid #000; */
+    /* box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2); */
+    overflow: hidden;
+    padding-top: 20px; 
+    padding-bottom: 20px;
+    margin: 10px;
+    border: 7px solid #ff5eae; /* Pink border color and thickness */
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    padding: 20px; /* Adding padding for consistency with other sections */
+    box-sizing: border-box; /* Ensure padding and border are included in the total width */
+
+    
+}
+
+.topDisplay {
+    display: flex;
+    margin-bottom: 20px;
+    height: 50px;
+}
+
+.button1 {
+    background-color: rgb(129, 133, 143);
+    border: none;
+    border-radius: 50px;
+    color: #b4bcd0;
+    font-weight: bold;
+    padding: 12px 25px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-right: 20px;
+    margin-left: 20px;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+/**/
+.button1:not(.active):hover {
+    cursor: not-allowed;
+}
+
+.button1.active {
+    background-color: #111827;
+    cursor: pointer;
+}
+
+.button1.active:hover {
+    color: rgb(255, 255, 255);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+}
+
+.button1:focus {
+    box-shadow: none;
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+}
+
+
+
+#connect-spike {
+    background-color: green;
+    color: rgb(255, 255, 255);
+}
+    
+
+#connect-spike.button1.connected {
+    background-color: #f33232;
+}
+
+#connect-spike.button1:not(.active) {
+    background-color: rgb(129, 133, 143);
+}
+
+/*
+#connect-spike:hover {
+    color: rgb(255, 255, 255);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+    */
+
+.flexBox {
+    height: 88%;
+    display: flex;
+    gap: 10px;
+    overflow-x: auto; /* Enable horizontal scrolling if needed */
+    
+}
+
+.box {
+    background-color: #f0f0f0;
+    backdrop-filter: blur(1px);
+    border-radius: 5px;
+    padding-left: 5px;
+    padding-right: 5px;
+    /* box-sizing: border-box; */
+    height: auto;
+}
+
+/*TO CHANGE WIDTH of left boxx change both widt and min-width*/
+.left-box {
+    flex: 0 0 auto;
+    width: 220px; /* Slightly larger than the max-width of internal elements */
+    min-width: 220px; 
+    position: relative;
+    text-align: center;
+    
+}
+
+.right-box {
+    margin-right: 10px;
+    overflow-x: hidden;
+    overflow-y: auto; /* Changed from hidden to auto */
+    display: flex;
+    flex-direction: column;
+}
+
+/*--------------------------------------------------------------*/
+
+.right-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+}
+
+.right-box:first-child {
+    min-height: 50px;
+    height: 100%;
+    flex: 1;
+}
+
+/*-----------------------------------------------------------------------*/
+
+.slider {
+    color: black;
+    background: #f9f9f9;
+    height: 20px;
+    border-radius: 4px;
+    cursor: row-resize;
+    transition: all 0.3s ease;
+    width: 99%;
+    margin-top: -10px;
+    text-align: center;
+}
+
+/*-----------------------------css for files select----------------------------------*/
+
+.filesDiv {
+    visibility: hidden;
+    display: inline-block;
+    position: relative;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    
+}
+
+.files {
+    color: #b4bcd0;
+    background-color: #111827;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    padding: 7px 9px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin-right: 7px;
+    margin-left: 7px;
+    transition: all 0.3s ease;
+    text-align: center;
+    cursor: pointer;
+    width: auto;
+    min-width: 150px; 
+    max-width: 200px; /* Adjust this value as needed */
+
+    word-wrap: break-word; /* break long words if necessary */
+    height: auto; 
+    min-height: 48px; 
+    line-height: 1.2;
+    
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.files:hover {
+    color: rgb(255, 255, 255);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Styling for options */
+.files option {
+    background-color: #998887;
+    color: #ffffff;
+    padding: 12px;
+    white-space: normal; 
+    word-wrap: break-word;
+}
+/* Styling for disabled state */
+.files:disabled {
+    background-color: #cccccc; /* Example: Change background color for disabled state */
+    color: #666666;           /* Example: Change text color for disabled state */
+    cursor: not-allowed;      /* Indicate the button is not clickable */
+    box-shadow: none;         /* Remove box shadow */
+    transform: none;          /* Remove transform effect */
+}
+
+/* Disable hover and focus effects when disabled */
+.files:disabled:hover,
+.files:disabled:focus {
+    box-shadow: none;
+    outline: none;
+    transform: none;
+}
+
+/* Styling for options */
+
+
+/*---------------------------------------------------------------*/
+
+.runCode{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px; /* Adjust the spacing between buttons */
+}
+
+.portInstructions {
+    width: 50%;
+    height: auto;
+    margin: auto;
+    margin-top: 20px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    padding: 20px;
+}
+
+.portInstructions h3 {
+    text-decoration: underline;
+    margin-bottom: 15px;
+    margin-top: 0;
+}
+
+.portInstructions .wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center; /* Center the flex items horizontally */
+}
+
+.portInstructions p {
+    margin: 2px;
+}
+
+.portInstructions p.big {
+    font-weight: 700;
+    font-size: 1.2em;
+}
+
+.portInstructions img{
+    height: 24px;
+    width: auto;
+    margin-right: 2px;
+}
+
+.gifFrame{
+    /* border: 2px solid black; */
+    border-radius: 5px;
+    height: auto;
+    margin: auto;
+    /* margin-top: 25px; */
+    width: 100%;
+}
+
+/*Aquii*/
+#gif{
+    display: none;
+    max-height: 350px;
+    width: 300px;
+    height: auto;
+    opacity: 1; 
+    transition: opacity 0.5s ease-in-out;
+}
+
+/*--------------------css for tabs and content for terminal and debugger------------------------*/
+
+.tab {
+    overflow: hidden;
+    background-color: #f1f1f1;
+    flex-shrink: 0; /* Prevent tab from shrinking */
+}
+  
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    transition: 0.3s;
+    font-size: 15px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+#customTerminalButton{
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+#customTerminalButton:disabled{
+    cursor: not-allowed;
+}
+
+#defaultTerminalButton{
+    border-left: 2px solid black;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+#defaultTerminalButton:disabled{
+    cursor: not-allowed;
+}
+
+
+
+
+/*---------------------------terminal vs debug containers---------------------------------*/
+
+.tabcontent {
+    background: white;
+    border-radius: 5px;
+    font-family: monospace;
+    font-size: 15px;
+    flex-grow: 1;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    padding: 5px;
+    overflow-x: hidden;
+}
+
+#terminal{
+    overflow-y: auto;
+    display: block;
+}
+
+#debug{
+    overflow-y: hidden;
+    display: none;
+    font-family: 'Courier New', monospace;
+    flex-grow: 1;
+    margin: 0;
+    padding: 5px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+}
+
+#resizeBox {
+    display: flex;
+    flex-direction: column;
+    height: 50%;
+    min-height: 100px;
+    overflow: hidden;
+}
+
+#terminalMessages {
+    min-height: 100%;
+}
+
+/* Style for the progress bar itself */
+progress {
+    display: none;
+    width: 100%;
+    height: 30px;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    position: relative
+    
+}
+
+progress::-webkit-progress-bar {
+    background-color: #f0f0f0;
+    border-radius: 15px;
+}
+
+progress::-webkit-progress-value {
+    background-color: #66ccff;
+    border-radius: 15px 0 0 15px;
+    transition: width 0.4s ease;
+}
+
+progress::-moz-progress-bar {
+    background-color: #66ccff;
+    border-radius: 15px;
+    transition: width 0.4s ease;
+}
+
+.progress-container {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+  
+  .progress-text {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 70%;
+    transform: translate(-100%, -100%);
+    color: #ffffff;
+    font-weight: bold;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    pointer-events: none; /* Ensure text does not interfere with interaction */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+
+/*   Progress bar   */
+
+/*Progress text */
+
+.progress-text {
+    text-align: center;
+    margin-top: 10px;
+    font-weight: bold;
+}
+/*Progress text */
+
+/* File input */
+.custom-file-input {
+    position: relative;
+    display: inline-block;
+    justify-content: center;
+    width: auto;
+    height: auto;
+    overflow: hidden;
+    margin: 0 auto;
+    padding: 0;
+    text-align: center;
+}
+
+.custom-file-input input[type="file"] {
+    position: absolute;
+    font-size: 100px;
+    
+    right: 0;
+    top: 0;
+    cursor: pointer;
+    height: 0%;
+    width: 0%;
+}
+
+.custom-file-input .button1 {
+    /* Your existing button1 styles */
+    display: inline-block;
+    position: relative;
+    z-index: 1;
+}
+
+
+
+
+
+
+/* File input */
+
+/* Vertical buttons */
+
+/* Flexbox for vertical buttons */
+.horizontal-buttons {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    max-width: 200px; /* Adjust this value to match the file selector width */
+    margin: 0 auto;
+}
+
+
+/* Vertical buttons */
+
+
+/* Some basic CSS overrides */
+
+
+
+button {
+  font: "Inter", sans-serif;
+  color:  #b4bcd0;
+}
+
+:root {
+  --color-text-primary: rgb(180, 188, 208);
+  --color-text-secondary: rgb(255, 255, 255);
+  --color-background-secondary: #111827;
+  --color-border: rgb(49, 48, 53);
+  --color-accent: rgb(85, 214, 121);
+  --shadow-alpha: 0.25;
+  --spinner: var(--color-accent);
+}
+
+.button {
+  border-radius: 50%;
+  padding: 0;
+  border: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  transition: color 0.15s ease, width 0.25s ease-out;
+  position: relative;
+  background-color: var(--color-background-secondary);
+  border: 1px solid var(--color-border);
+}
+
+.button-row{
+    z-index: 3;
+}
+
+.button--play {
+    width: 60px;
+    height: 60px;
+    position: relative;
+}
+.button--play:after {
+    content: "";
+    display: block;
+    width: calc(100% + 10px);
+    height: calc(100% + 10px);
+    z-index: -1;
+    left: -5px;
+    top: -5px;
+    position: absolute;
+    background-image: conic-gradient(transparent, var(--spinner));
+    border-radius: 99em;
+    opacity: 0;
+
+}
+.button--play .ph-play,
+.button--play .ph-pause {
+    grid-row-start: 1;
+    grid-column-start: 1;
+    transition: opacity 0.15s ease, transform 0.25s ease;
+}
+
+.button--play.is-active:after {
+    z-index: -1;
+    opacity: 1;
+    animation: spin 2s linear infinite;
+}
+
+.button--play .ph-play {
+    opacity: 1;
+}
+
+.button--play .ph-pause {
+    opacity: 0;
+    transform: rotate(0);
+}
+
+.button--play.is-active .ph-play {
+    opacity: 0;
+    transform: rotate(180deg);
+}
+
+.button--play.is-active .ph-pause {
+    opacity: 1;
+    transform: rotate(180deg);
+}
+
+.button--play.is-active:after {
+    opacity: 1;
+    animation: spin 2s linear infinite;
+}
+
+.button:not(.disabled):hover {
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    color: var(--color-text-secondary);
+}
+
+.button.is-active {
+    color: var(--color-accent);
+}
+
+@keyframes spin {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.button--play.disabled:after {
+    opacity: 0;
+}
+
+.button.disabled {
+    --color-background-secondary: rgb(129, 133, 143);
+    --color-border: rgb(143, 134, 129);
+    --color-accent: rgb(255, 255, 255);
+    cursor: not-allowed;
+}
+
+/* Play image for button */
+.gg-play-button {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 48px;
+    height: 48px;
+}
+
+.gg-play-button::before {
+    content: "";
+    display: block;
+    box-sizing: border-box;
+    position: absolute;
+    width: 0;
+    height: 24px;
+    border-top: 12px solid transparent;
+    border-bottom: 12px solid transparent;
+    border-left: 16px solid;
+    top: 12px;
+    left: 17px;
+}
+
+/* STOP image for run button */
+.gg-play-stop {
+    box-sizing: border-box;
+    position: relative;
+    display: block;
+    transform: scale(var(--ggs, 1));
+    width: 20px;
+    height: 20px;
+    background: currentColor;
+}
+
+/*Save icon*/
+
+#save_button {
+    border: none; /* Remove border if needed */
+    border-radius: 50%; /* Make the button circular */
+    width: 60px; /* Adjust width */
+    height: 60px; /* Adjust height */
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */   
+}
+
+#save_button .fa-save {
+    font-size: 35px; /* Adjust icon size as needed */
+    /* color: #ffffff; /* Set icon color */
+}
+
+#save_button.disabled:hover .fa-save {
+    color: rgb(255, 255, 255); 
+}
+
+
+
+
+/*
+#save_button .fa-save {
+    font-size: 38px; 
+    color: rgb(180, 188, 208); 
+    transition: color 0.3s ease; 
+}
+
+#save_button:hover .fa-save {
+    color: rgb(255, 255, 255); 
+}
+
+#save_button {
+    padding: 20px 20px;
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border: none; 
+    cursor: pointer; 
+}
+*/
+
+
+
+
+  /*Save icon*/
+
+  
+  /*DOWNLOAD BUTTON*/
+
+/* Style the button to be circular and center its content */
+#download-code {
+    border: none; /* Remove border if needed */
+    border-radius: 50%; /* Make the button circular */
+    width: 60px; /* Adjust width */
+    height: 60px; /* Adjust height */
+    margin: auto;
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    overflow: visible; /* Ensure the icon doesn't overflow */
+    position: relative; /* Positioning context for any absolute elements */
+    /* margin-left: -20px; */
+}
+
+/* Style the Font Awesome icon */
+#download-code .fa {
+    font-size: 30px; /* Adjust icon size */
+    margin: 0; /* Remove default margin/padding */
+    line-height: 1; /* Ensure no extra space below the icon */
+    
+}
+
+/* Add a warning icon for download */
+
+#download-code::before {
+    content: "\f071"; /* Unicode for Font Awesome warning icon */
+    font-family: 'Font Awesome 6 Free'; /* Font Awesome 6 Free or other font family */
+    font-weight: 900; /* Ensure the icon is rendered correctly */
+    font-size: 20px; /* Adjust size as needed */
+    color: #ffcc00; /* Set color for the warning icon */
+    position: absolute; /* Position it absolutely */
+    top: -20px; /* Move it above the button */
+    left: 50%; /* Center horizontally relative to the button */
+    transform: translate(30%, 80%); /* Center vertically above the button */
+    z-index: 2; /* Ensure it appears above the button content */
+    opacity: 0;  /*Initially hidden */
+    transition: opacity 0.5s ease-in-out; /* Smooth transition */
+}
+
+/* Class to fade in the warning icon */
+#download-code.fade-in::before,
+#download-code.fade-in::after {
+    opacity: 1; /* Make the icon and border visible */
+}
+
+/* Class to fade out the warning icon */
+#download-code.fade-out::before,
+#download-code.fade-out::after {
+    opacity: 0; /* Hide the icon and border */
+}
+
+/* Style the button to be circular and center its content */
+#chooseFileButton {
+    border-radius: 50%; /* Make the button circular */
+    width: 60px; /* Adjust width */
+    height: 60px; /* Adjust height */
+    margin: auto;
+    margin-right: 0;
+    display: flex; /* Use flexbox to center content */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    overflow: visible; /* Ensure the icon doesn't overflow */
+    position: relative; /* Positioning context for any absolute elements */
+}
+
+#chooseFileButton .fa {
+    font-size: 30px; /* Adjust icon size */
+    margin: 0; /* Remove default margin/padding */
+    line-height: 1; /* Ensure no extra space below the icon */
+
+}
+
+/* For overlay when disconnecting*/
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: none; /* Hidden by default */
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Modal */
+.modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+/* Buttons */
+.modal button {
+    margin: 10px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-yes {
+    background-color: #28a745;
+    color: white;
+}
+
+.btn-no {
+    background-color: #dc3545;
+    color: white;
+}
+
+.subtitle {
+    font-size: 0.8em; /* Adjust this value to make the subtitle smaller */
+    color: gray; /* Optional: to differentiate the subtitle color */
+}
+
+
+/* For overlay when disconnecting*/
+
+
+
+/*TO allow sensor info and progress bar to be on same location*/
+.status-container {
+    position: relative; /* Allows absolute positioning of children */
+    width: 100%; /* Adjust width as needed */
+    height: 100px; /* Adjust height as needed */
+    overflow-y: auto;
+}
+
+
+/*For hyperlink*/
+.special-link {
+    color: black;
+    text-decoration: none;
+}
+.special-link:hover {
+    text-decoration: underline; /* Ensures the link stays underlined on hover */
+    color: black;
+    font-weight: bold;
+}
