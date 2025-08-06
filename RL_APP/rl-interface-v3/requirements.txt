@@ -1,5 +1,5 @@
 roslibpy==1.7.0
-gunicorn==20.0.4
+gunicorn==23.0.0
 Jinja2==3.1.4
 numpy==1.26.4
 pybullet==3.2.6
