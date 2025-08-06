@@ -1,6 +1,6 @@
 roslibpy==1.7.0
 gunicorn==23.0.0
-Jinja2==3.1.4
+Jinja2==3.1.6
 numpy==1.26.4
 pybullet==3.2.6
 Flask==2.2.5
