@@ -4,4 +4,4 @@ Jinja2==3.1.6
 numpy==1.26.4
 pybullet==3.2.6
 Flask==2.2.5
-Werkzeug==3.0.6
+Werkzeug==3.1.5
